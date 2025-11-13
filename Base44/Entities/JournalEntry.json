@@ -1,0 +1,40 @@
+{
+  "name": "JournalEntry",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the journal entry"
+    },
+    "prompt": {
+      "type": "string",
+      "description": "The daily prompt for this entry"
+    },
+    "response": {
+      "type": "string",
+      "description": "User's response to the prompt"
+    },
+    "mood": {
+      "type": "string",
+      "enum": [
+        "amazing",
+        "good",
+        "okay",
+        "tough",
+        "difficult"
+      ],
+      "description": "User's mood for the day"
+    },
+    "completion_time": {
+      "type": "number",
+      "description": "Time taken to complete in seconds"
+    }
+  },
+  "required": [
+    "date",
+    "prompt",
+    "response",
+    "mood"
+  ]
+}

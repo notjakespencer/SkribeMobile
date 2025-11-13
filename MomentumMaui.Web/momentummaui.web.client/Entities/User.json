@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "properties": {
+    "current_streak": {
+      "type": "number",
+      "default": 0,
+      "description": "Current streak of consecutive days"
+    },
+    "longest_streak": {
+      "type": "number",
+      "default": 0,
+      "description": "Longest streak achieved"
+    },
+    "total_xp": {
+      "type": "number",
+      "default": 0,
+      "description": "Total experience points"
+    },
+    "level": {
+      "type": "number",
+      "default": 1,
+      "description": "Current level"
+    },
+    "theme": {
+      "type": "string",
+      "enum": [ "light", "dark" ],
+      "default": "light",
+      "description": "User's theme preference"
+    }
+  },
+  "name": "User",
+  "required": []
+}

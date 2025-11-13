@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "Momentum.AIAgent": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "AZURE_OPENAI_ENDPOINT": "https://momentumapp-resource.cognitiveservices.azure.com/",
+        "AZURE_OPENAI_DEPLOYMENT_NAME": "gpt-4.1"
+      },
+      "applicationUrl": "https://localhost:54626;http://localhost:54627"
+    }
+  }
+}

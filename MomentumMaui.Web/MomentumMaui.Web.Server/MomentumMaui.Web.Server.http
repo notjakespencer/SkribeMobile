@@ -1,0 +1,6 @@
+@MomentumMaui.Web.Server_HostAddress = http://localhost:5255
+
+GET {{MomentumMaui.Web.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "type": "secrets.user"
+    },
+    "storage1": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('serviceConnectorResourceGroupName')]/providers/Microsoft.ServiceLinker/locations/swedencentral/connectors/StorageConnection_3482D7B121, /subscriptions/8f2ddee4-ad88-4cbe-ad41-ba11955085a5/resourceGroups/J2K_Storage/providers/Microsoft.ServiceLinker/locations/swedencentral/connectors/StorageConnection_4CF4380FF9",
+      "secretStore": "LocalSecretsFile",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Storage/storageAccounts/j2kjsonstorage",
+      "type": "storage.azure",
+      "connectionId": "StorageConnection"
+    }
+  }
+}

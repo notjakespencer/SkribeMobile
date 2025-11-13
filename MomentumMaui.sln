@@ -1,0 +1,90 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36623.8
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MomentumMaui", "MomentumMaui\MomentumMaui.csproj", "{890CEA04-1A57-40CE-9133-BF71082294DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Momentum.Shared", "Momentum.Shared\Momentum.Shared.csproj", "{C36CCBE4-078E-47A4-B852-DB5C3E0845A3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Base44", "Base44", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pages", "Pages", "{1BCE7A28-8C97-43D1-A70B-44F807A0E4EE}"
+	ProjectSection(SolutionItems) = preProject
+		Base44\Pages\History.js = Base44\Pages\History.js
+		Base44\Pages\Journal.js = Base44\Pages\Journal.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{A1077C00-77FD-447D-BEE5-4429532EE692}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entities", "Entities", "{AE4A36AB-946E-452C-8484-25C1C5AB59EB}"
+	ProjectSection(SolutionItems) = preProject
+		Base44\Entities\JournalEntry.json = Base44\Entities\JournalEntry.json
+		Base44\Entities\User.json = Base44\Entities\User.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Journal", "Journal", "{0A7D96A9-4EC8-4A16-B35F-8C90A3F61FF3}"
+	ProjectSection(SolutionItems) = preProject
+		Base44\Components\Journal\MoodSelector.jsx = Base44\Components\Journal\MoodSelector.jsx
+		Base44\Components\Journal\PromptCard.jsx = Base44\Components\Journal\PromptCard.jsx
+		Base44\Components\Journal\StatsHeader.jsx = Base44\Components\Journal\StatsHeader.jsx
+		Base44\Components\Journal\ThemeToggle.jsx = Base44\Components\Journal\ThemeToggle.jsx
+		Base44\Components\Journal\Timer.js = Base44\Components\Journal\Timer.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Calendar", "Calendar", "{2CA18BF4-C403-428A-A10D-A5D8A8121A13}"
+	ProjectSection(SolutionItems) = preProject
+		Base44\Components\Calendar\CalendarGrid.jsx = Base44\Components\Calendar\CalendarGrid.jsx
+		Base44\Components\Calendar\EntryModal.jsx = Base44\Components\Calendar\EntryModal.jsx
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Momentum.AIAgent", "Momentum.AIAgent\Momentum.AIAgent.csproj", "{F988EE03-0E05-6084-457A-E1C9BDDDA2C8}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "momentummaui.web.client", "MomentumMaui.Web\momentummaui.web.client\momentummaui.web.client.esproj", "{71965F6D-D63B-5CCB-5A41-69E3819227E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MomentumMaui.Web.Server", "MomentumMaui.Web\MomentumMaui.Web.Server\MomentumMaui.Web.Server.csproj", "{E5A8678C-61F0-4C19-9EBA-174D83463002}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{890CEA04-1A57-40CE-9133-BF71082294DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{890CEA04-1A57-40CE-9133-BF71082294DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{890CEA04-1A57-40CE-9133-BF71082294DE}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{890CEA04-1A57-40CE-9133-BF71082294DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{890CEA04-1A57-40CE-9133-BF71082294DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C36CCBE4-078E-47A4-B852-DB5C3E0845A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C36CCBE4-078E-47A4-B852-DB5C3E0845A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C36CCBE4-078E-47A4-B852-DB5C3E0845A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C36CCBE4-078E-47A4-B852-DB5C3E0845A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F988EE03-0E05-6084-457A-E1C9BDDDA2C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F988EE03-0E05-6084-457A-E1C9BDDDA2C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F988EE03-0E05-6084-457A-E1C9BDDDA2C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F988EE03-0E05-6084-457A-E1C9BDDDA2C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71965F6D-D63B-5CCB-5A41-69E3819227E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71965F6D-D63B-5CCB-5A41-69E3819227E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71965F6D-D63B-5CCB-5A41-69E3819227E7}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{71965F6D-D63B-5CCB-5A41-69E3819227E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71965F6D-D63B-5CCB-5A41-69E3819227E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71965F6D-D63B-5CCB-5A41-69E3819227E7}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{E5A8678C-61F0-4C19-9EBA-174D83463002}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5A8678C-61F0-4C19-9EBA-174D83463002}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5A8678C-61F0-4C19-9EBA-174D83463002}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5A8678C-61F0-4C19-9EBA-174D83463002}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1BCE7A28-8C97-43D1-A70B-44F807A0E4EE} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{A1077C00-77FD-447D-BEE5-4429532EE692} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{AE4A36AB-946E-452C-8484-25C1C5AB59EB} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{0A7D96A9-4EC8-4A16-B35F-8C90A3F61FF3} = {A1077C00-77FD-447D-BEE5-4429532EE692}
+		{2CA18BF4-C403-428A-A10D-A5D8A8121A13} = {A1077C00-77FD-447D-BEE5-4429532EE692}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DECF0B5B-7CF9-44C9-ABA3-9E3308702C93}
+	EndGlobalSection
+EndGlobal
