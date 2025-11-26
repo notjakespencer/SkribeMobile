@@ -6,161 +6,198 @@
              Title=""
              Shell.NavBarIsVisible="False">
 
-
     <Grid RowDefinitions="*, Auto" ColumnDefinitions="*">
         <ScrollView Grid.Row="0">
-        <VerticalStackLayout
-            Padding="25,12"
-            Spacing="18"
-            VerticalOptions="Start">
+            <!-- Use two weighted spacers with different weights so the timer sits below center
+                 but not too low. Adjust the '*' weights to tune the vertical position. -->
+            <Grid RowDefinitions="Auto, Auto, Auto, Auto, *, *" ColumnDefinitions="*"
+                  Padding="25,12" RowSpacing="18">
 
-            <!--#region Stats Header -->
-            <!-- Stats Header -->
-            <Grid Margin="0, 4, 0, 0" HorizontalOptions="Fill" ColumnDefinitions="Auto, *, Auto" VerticalOptions="Start">
-                <HorizontalStackLayout Grid.Column="0" Spacing="12" VerticalOptions="Center">
+                <!-- Stats Header (row 0) -->
+                <Grid Grid.Row="0" Margin="0,4,0,0" HorizontalOptions="Fill" ColumnDefinitions="Auto,*,Auto" VerticalOptions="Start">
+                    <HorizontalStackLayout Grid.Column="0" Spacing="12" VerticalOptions="Center">
 
-                    <!-- Streak -->
-                    <Frame
-                        Background="{DynamicResource CardBrush}"
-                        BorderColor="{DynamicResource BorderBrush}"
-                        CornerRadius="12"
-                        Padding="10"
-                        HasShadow="True"
-                        VerticalOptions="Center" 
-                        HeightRequest="84">
-                        <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
-                            <Image x:Name="StreakIcon"
-                                     WidthRequest="28"
-                                     HeightRequest="28"
-                                     Aspect="AspectFit"
-                                     Source="flame.svg" />
-                            <VerticalStackLayout Spacing="2" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="76">
-                                <Label x:Name="StreakLabel"
-                                     Text="0"
-                                     FontSize="18"
-                                     FontAttributes="Bold"
-                                     HorizontalTextAlignment="Center" />
-                                <Label Text="DAY STREAK"
-                                     FontSize="12"
-                                     HorizontalTextAlignment="Center" 
-                                     TextColor="{DynamicResource MutedForegroundBrush}"/>
-                            </VerticalStackLayout>
-                        </HorizontalStackLayout>
-                    </Frame>
-
-
-                    <!-- Level & XP -->
-                    <Frame 
-                        Background="{DynamicResource CardBrush}"
-                        BorderColor="{DynamicResource BorderBrush}"
-                        CornerRadius="12"
-                        Padding="10"
-                        HasShadow="true"
-                        VerticalOptions="Center">
-                        <VerticalStackLayout Spacing="8" VerticalOptions="Center" HorizontalOptions="Center">
-                            <HorizontalStackLayout Spacing="8" VerticalOptions="Center" HorizontalOptions="Center">
-                                <Image x:Name="XpIcon"
-                                 WidthRequest="20"
-                                 HeightRequest="20"
-                                 Aspect="AspectFit"
-                                 Source="zap.svg" />
-                                <Label x:Name="LevelLabel"
-                                 Text="LEVEL 1"
-                                 FontSize="16"
-                                 VerticalTextAlignment="Center" 
-                                 HorizontalTextAlignment="Center"/>
+                        <!-- Streak -->
+                        <Border
+                            Background="{DynamicResource CardBrush}"
+                            Padding="10"
+                            VerticalOptions="Center"
+                            HeightRequest="84">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+                            <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                                <Image x:Name="StreakIcon"
+                                       WidthRequest="28"
+                                       HeightRequest="28"
+                                       Aspect="AspectFit"
+                                       Source="flame_dark.svg" />
+                                <VerticalStackLayout Spacing="2" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="76">
+                                    <Label x:Name="StreakLabel"
+                                           Text="0"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           HorizontalTextAlignment="Center" />
+                                    <Label Text="DAY STREAK"
+                                           FontSize="12"
+                                           HorizontalTextAlignment="Center"
+                                           TextColor="{DynamicResource MutedForegroundBrush}"/>
+                                </VerticalStackLayout>
                             </HorizontalStackLayout>
+                        </Border>
 
-                            <ProgressBar x:Name="XpProgressBar"
-                                    Progress="0"
-                                    WidthRequest="120"
-                                    HeightRequest="6" 
-                                    HorizontalOptions="Fill"/>
+                        <!-- Level & XP -->
+                        <Border
+                            Background="{DynamicResource CardBrush}"
+                            Padding="10"
+                            VerticalOptions="Center">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+                            <VerticalStackLayout Spacing="8" VerticalOptions="Center" HorizontalOptions="Center">
+                                <HorizontalStackLayout Spacing="8" VerticalOptions="Center" HorizontalOptions="Center">
+                                    <Image x:Name="XpIcon"
+                                           WidthRequest="20"
+                                           HeightRequest="20"
+                                           Aspect="AspectFit"
+                                           Source="zap.svg" />
+                                    <Label x:Name="LevelLabel"
+                                           Text="LEVEL 1"
+                                           FontSize="16"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Center"/>
+                                </HorizontalStackLayout>
 
-                            <Label x:Name="XpLabel"
-                                 Text="0 / 100 XP"
-                                 FontSize="12"
-                                 HorizontalTextAlignment="Center"
-                                 TextColor="{DynamicResource MutedForegroundBrush}"/>
-                        </VerticalStackLayout>
-                    </Frame>
-                </HorizontalStackLayout>
+                                <ProgressBar x:Name="XpProgressBar"
+                                             Progress="0"
+                                             WidthRequest="120"
+                                             HeightRequest="6"
+                                             HorizontalOptions="Fill"/>
 
-                <!-- Theme Toggle -->
-                <Frame Grid.Column="2"
-                       Background="{DynamicResource CardBrush}"
-                       BorderColor="{DynamicResource BorderBrush}"
-                       CornerRadius="12"
-                       Padding="6"
-                       HasShadow="True"
-                       VerticalOptions="Center"
-                       HorizontalOptions="End">
-                    <ImageButton x:Name="ThemeButton"
-                                 Source="sun.svg"
-                                 BackgroundColor="Transparent"
-                                 BorderWidth="0"
-                                 Clicked="OnThemeToggleClicked"
-                                 WidthRequest="36"
-                                 HeightRequest="36" />
-                </Frame>
+                                <Label x:Name="XpLabel"
+                                       Text="0 / 100 XP"
+                                       FontSize="12"
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="{DynamicResource MutedForegroundBrush}"/>
+                            </VerticalStackLayout>
+                        </Border>
+                    </HorizontalStackLayout>
+
+                    <!-- Theme Toggle -->
+                    <Border Grid.Column="2"
+                           Background="{DynamicResource CardBrush}"
+                           Padding="15"
+                           HeightRequest="65"
+                           WidthRequest="65"
+                           VerticalOptions="Center"
+                           HorizontalOptions="End">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="50" />
+                        </Border.StrokeShape>
+                        <controls:AnimatedThemeIcon
+                            x:Name="ThemeButton"
+                            LightSource="moon.svg"
+                            DarkSource="sun.svg"
+                            Duration="300"
+                            AnimateOnInitial="True">
+                            <controls:AnimatedThemeIcon.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnThemeToggleClicked" />
+                            </controls:AnimatedThemeIcon.GestureRecognizers>
+                        </controls:AnimatedThemeIcon>
+                    </Border>
+                </Grid>
+
+                <!-- Small flexible spacer (row 1) -->
+
+                <!-- Timer Control (row 2) - nudged slightly higher -->
+                <controls:TimerControl Grid.Row="1"
+                                       x:Name="MyTimer"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       Margin="0,25,0,0" />
+
+                <!-- Prompt (row 2) - 20px gap from timer -->
+                <Border x:Name="PromptBorder"
+                        Grid.Row="2"                        
+                        WidthRequest="400"
+                        MaximumWidthRequest="600"
+                        HorizontalOptions="Center"
+                        Margin="0, 20, 0, 5"
+                        Background="{DynamicResource CardBrush}"
+                        Stroke="Transparent">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="12" />
+                    </Border.StrokeShape>
+
+                    <Label x:Name="PromptLabel"
+                           Text="Loading Daily Prompt"
+                           HorizontalTextAlignment="Center"
+                           FontSize="18"
+                           Margin="8.25, 6"
+                           TextColor="{DynamicResource MutedForegroundBrush}" />
+                </Border>
+
+                <!-- Prompt Response Box (row 4) - moved ~20px under the Prompt -->
+                <Border Grid.Row="3"
+                        Margin="0, 5, 0, 0"
+                        WidthRequest="400"
+                        HorizontalOptions="Center"
+                        Padding="6"
+                        Background="{DynamicResource CardBrush}" >
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="12" />
+                    </Border.StrokeShape>
+
+                    <Editor x:Name="PromptResponse"
+                        AutoSize="TextChanges"
+                        Placeholder="Enter your response..."
+                        FontSize="18"
+                        BackgroundColor="{DynamicResource CardBrush}"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Center" />
+                </Border>
+
+                <!-- Buttons to control the timer (row 5) -->
+                <VerticalStackLayout Grid.Row="5" Spacing="8">
+                    <Button Text="Start Timer"
+                            Clicked="OnStartClicked"
+                            HorizontalOptions="Fill" />
+
+                    <Button Text="Stop Timer"
+                            Clicked="OnStopClicked"
+                            HorizontalOptions="Fill" />
+                </VerticalStackLayout>
             </Grid>
-            <!--#endregion-->
+        </ScrollView>
 
-            <!-- <Label
-                Text="MOMENTUM"
-                Style="{StaticResource Headline}"
-                HorizontalTextAlignment="Center"
-                SemanticProperties.HeadingLevel="Level1" />
-            -->
-
-            <!--  Timer Control -->
-            <controls:TimerControl x:Name="MyTimer"
-                                   HorizontalOptions="Center" />
-
-            <!-- Daily Prompt Display -->
-            <Label x:Name="PromptLabel"
-                   Text="Loading Daily Prompt"
-                   HorizontalTextAlignment="Center"
-                   FontSize="Medium"
-                   TextColor="Gray" />
-
-            <!-- Prompt Response Box -->
-            <Editor x:Name="PromptResponse"                    
-                     AutoSize="TextChanges"
-                     Placeholder="Enter your response..."/>
-
-            <!-- Buttons to control the timer -->
-            <Button
-                Text="Start Timer"
-                Clicked="OnStartClicked"
-                HorizontalOptions="Fill" />
-
-            <Button
-                Text="Stop Timer"
-                Clicked="OnStopClicked"
-                HorizontalOptions="Fill" />
-
-        </VerticalStackLayout>
-    </ScrollView>
-
-    <Frame Grid.Row="1"
-           Padding="10"
-           HasShadow="False"
-           BackgroundColor="{DynamicResource CardBrush}"
-           BorderColor="{DynamicResource BorderBrush}" >
-        <HorizontalStackLayout Spacing="12" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
-            <!-- Journal -->
-            <Button x:Name="JournalButton"
-                    Text="Journal"
-                    HorizontalOptions="FillAndExpand"
-                    Clicked="OnJournalClicked" />
-
-            <!-- History -->
-            <Button x:Name="HistoryBUtton"
-                    Text="History"
-                    HorizontalOptions="FillAndExpand"
-                    Clicked="OnHistoryClicked" />
-        </HorizontalStackLayout>
-    </Frame>
+        <Border Grid.Row="1"
+               Padding="10"
+               Background="{AppThemeBinding Light={StaticResource LightCard}, Dark={StaticResource DarkBackground}}" >
+            <HorizontalStackLayout Spacing="12" HorizontalOptions="Center" VerticalOptions="Center">
+                <!-- Journal -->
+                <ImageButton
+                    x:Name=" JournalImageButton"
+                    Source="book_open.png"
+                    Clicked="OnJournalClicked"
+                    BackgroundColor="Transparent"
+                    WidthRequest="36"
+                    HeightRequest="36"
+                    Aspect="AspectFit"
+                    AutomationProperties.IsInAccessibleTree="True"
+                    AutomationProperties.Name="Journal" />
+                
+                <!-- History -->
+                <ImageButton
+                    x:Name="HistoryImageButton"
+                    Source="calendar.svg"
+                    Clicked="OnHistoryClicked"
+                    BackgroundColor="Transparent"
+                    WidthRequest="36"
+                    HeightRequest="36"
+                    Aspect="AspectFit"
+                    AutomationProperties.IsInAccessibleTree="True"
+                    AutomationProperties.Name="History" />
+            </HorizontalStackLayout>
+        </Border>
     </Grid>
 </ContentPage>

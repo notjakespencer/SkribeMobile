@@ -1,5 +1,6 @@
 ﻿using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Controls;
+using MomentumMaui.Controls;
 using Momentum.Shared.Data;
 using Momentum.Shared.Services;
 using System;
@@ -22,7 +23,22 @@ namespace MomentumMaui
         void UpdateThemeIcon()
         {
             bool isLight = Application.Current?.UserAppTheme == AppTheme.Light;
-            ThemeButton.Source = isLight ? "moon.svg" : "sun.svg";
+
+            var animated = this.FindByName<AnimatedThemeIcon>("ThemeButton");
+            if (animated != null)
+            {
+                animated.LightSource = "moon.svg";
+                animated.DarkSource = "sun.svg";
+                animated.ThemeKey = isLight ? "light" : "dark";
+                _ = animated.PlayAnimationAsync();
+                return;
+            }
+            var imageButton = this.FindByName<ImageButton>("ThemeButton");
+            if (imageButton != null)
+            {
+                imageButton.Source = isLight ? "moon.svg" : "sun.svg";
+                return;
+            }
         }
 
         protected override void OnAppearing()
@@ -63,10 +79,29 @@ namespace MomentumMaui
             DisplayAlertAsync("Timer Complete", "The 2-minute timer has finished!", "OK");
         }
 
-        private void OnThemeToggleClicked(object sender, EventArgs e)
+        private async void OnThemeToggleClicked(object sender, EventArgs e)
         {
             var newTheme = Application.Current?.UserAppTheme == AppTheme.Light ? AppTheme.Dark : AppTheme.Light;
-            Application.Current?.UserAppTheme = newTheme;
+            Application.Current!.UserAppTheme = newTheme;
+
+            var animated = this.FindByName<AnimatedThemeIcon>("ThemeButton");
+            if (animated != null)
+            {
+                animated.LightSource = "moon.svg";
+                animated.DarkSource = "sun.svg";
+                animated.ThemeKey = newTheme == AppTheme.Light ? "light" : "dark";
+                await animated.PlayAnimationAsync();
+                return;
+            }
+
+            var imageBtn = this.FindByName<ImageButton>("ThemeButton");
+            if (imageBtn != null)
+            {
+                imageBtn.Source = newTheme == AppTheme.Light ? "moon.svg" : "sun.svg";
+                return;
+            }
+
+            // Final fallback: call UpdateThemeIcon (safe no-op if nothing exists)
             UpdateThemeIcon();
         }
 
@@ -81,23 +116,39 @@ namespace MomentumMaui
             // Start on the Journal Page -> Add a visual to the tab to show the page
         }
 
-        private async Task OnHistoryClicked(object sender, EventArgs e)
+        // Signature changed to match XAML event handler requirements (return type must be void).
+        // Also keep async so we can await navigation operations.
+        private async void OnHistoryClicked(object sender, EventArgs e)
         {
             // Try to push navigation stack.  If this page isn't wrapped in a NavigationPage,
-            // Fall back to setting the MainPage to a NavigationPage containing HistoryPage
+            // Fall back to updating the active Window.Page or opening a new Window instead
+            // of setting Application.Current.MainPage (deprecated).
 
-            try
+            var historyPage = new HistoryPage();
+            var navPage = new NavigationPage(historyPage);
+
+            if (this.Window != null)
             {
-                if (this.Navigation != null && this.Navigation.NavigationStack != null)
-                {
-                    await Navigation.PushAsync(new HistoryPage());
-                    return;
-                }
+                this.Window.Page = navPage;
+                return;
             }
-            catch
+
+            var windows = Application.Current?.Windows;
+            if (windows != null && windows.Count > 0)
             {
-                // Ignore and fall back
-            } Application.Current.MainPage = new NavigationPage(new HistoryPage());
+                windows[0].Page = navPage;
+                return;
+            }
+
+            if (Navigation?.NavigationStack != null)
+            {
+                await Navigation.PushAsync(historyPage);
+                return;
+            }
+
+            // Final fallback: create and open a new Window containing the navigation page
+            var newWindow = new Window(navPage);
+            Application.Current?.OpenWindow(newWindow);
         }
     }
 }

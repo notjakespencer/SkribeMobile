@@ -4,32 +4,65 @@
              x:Class="MomentumMaui.HistoryPage"
              Title="History">
 
-    <VerticalStackLayout Padding="20" Spacing="12">
+  <Grid RowDefinitions="*, Auto">
+    <!-- Content -->
+    <ScrollView Grid.Row="0">
+      <VerticalStackLayout Padding="20" Spacing="12">
         <Label Text="Journal History"
                FontAttributes="Bold"
                FontSize="22"
                HorizontalOptions="Center" />
 
-        <!-- Placeholder calendar area — replace with a proper calendar control if you add one -->
-        <Frame Background="{DynamicResource CardBrush}"
-               BorderColor="{DynamicResource BorderBrush}"
-               CornerRadius="12"
-               Padding="12">
-            <VerticalStackLayout>
-                <Label Text="Calendar view coming soon."
-                       FontSize="16"
-                       HorizontalOptions="Center" />
-                <Label Text="(Replace this placeholder with a calendar / calendar grid.)"
-                       FontSize="12"
-                       TextColor="{DynamicResource MutedForegroundBrush}"
-                       HorizontalOptions="Center" />
-            </VerticalStackLayout>
-        </Frame>
+        <!-- Placeholder calendar area -->
+        <Border Background="{DynamicResource CardBrush}"
+                Padding="12">
+          <VerticalStackLayout>
+            <Label Text="Calendar view coming soon."
+                   FontSize="16"
+                   HorizontalOptions="Center" />
+            <Label Text="(Replace this placeholder with a calendar / calendar grid.)"
+                   FontSize="12"
+                   TextColor="{DynamicResource MutedForegroundBrush}"
+                   HorizontalOptions="Center" />
+          </VerticalStackLayout>
+        </Border>
 
         <!-- Example: date picker to inspect entries by date -->
         <HorizontalStackLayout Spacing="10">
-            <DatePicker x:Name="HistoryDatePicker" />
-            <Button Text="Open Entry" Clicked="OnOpenEntryClicked" />
+          <DatePicker x:Name="HistoryDatePicker" />
+          <Button Text="Open Entry" Clicked="OnOpenEntryClicked" />
         </HorizontalStackLayout>
-    </VerticalStackLayout>
+      </VerticalStackLayout>
+    </ScrollView>
+
+    <!-- Bottom navigation (matches MainPage style) -->
+        <Border Grid.Row="1"
+            Padding="10"
+            Background="{AppThemeBinding Light={StaticResource LightCard}, Dark={StaticResource DarkBackground}}" >
+            <HorizontalStackLayout Spacing="12" HorizontalOptions="Center" VerticalOptions="Center">
+                
+        <ImageButton
+            x:Name="JournalImageButton"
+            Source="book_open.svg"
+            Clicked="OnJournalClicked"
+            BackgroundColor="Transparent"
+            WidthRequest="36"
+            HeightRequest="36"
+            Aspect="AspectFit"
+            AutomationProperties.IsInAccessibleTree="True"
+            AutomationProperties.Name="Journal" />
+
+        <ImageButton
+            x:Name=" HistoryImageButton"
+            Source="calendar.svg"
+            Clicked="OnHistoryClicked"
+            BackgroundColor="Transparent"
+            WidthRequest="36"
+            HeightRequest="36"
+            Aspect="AspectFit"
+            AutomationProperties.IsInAccessibleTree="True"
+            AutomationProperties.Name="Journal" />
+      </HorizontalStackLayout>
+    </Border>
+  </Grid>
 </ContentPage>

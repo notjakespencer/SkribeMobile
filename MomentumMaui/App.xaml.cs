@@ -7,19 +7,19 @@
             InitializeComponent();
             
             // Set default theme to Dark
-            Application.Current.UserAppTheme = AppTheme.Dark;
+            Application.Current?.UserAppTheme = AppTheme.Dark;
             
             MainPage = new AppShell();
         }
 
         public void SetTheme(AppTheme theme)
         {
-            Application.Current.UserAppTheme = theme;
+            Application.Current?.UserAppTheme = theme;
         }
 
         public AppTheme GetCurrentTheme()
         {
-            return Application.Current.UserAppTheme;
+            return Application.Current?.UserAppTheme ?? AppTheme.Unspecified;
         }
 
         public void ToggleTheme()

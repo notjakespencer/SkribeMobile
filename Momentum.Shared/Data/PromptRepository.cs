@@ -187,7 +187,7 @@ namespace Momentum.Shared.Data
 
             // Category: Mindfulness & Well-being
             #region Mindfulness
-		new Prompt { Id = 161, Category = "Mindfulness & Well-being", Text = "What is one thing you can do to be present in this moment?" },
+		    new Prompt { Id = 161, Category = "Mindfulness & Well-being", Text = "What is one thing you can do to be present in this moment?" },
             new Prompt { Id = 162, Category = "Mindfulness & Well-being", Text = "Describe a physical sensation you are feeling right now." },
             new Prompt { Id = 163, Category = "Mindfulness & Well-being", Text = "What is a sound you can hear right now? Describe it." },
             new Prompt { Id = 164, Category = "Mindfulness & Well-being", Text = "What is a worry that is on your mind? Can you let it go for a moment?" },
