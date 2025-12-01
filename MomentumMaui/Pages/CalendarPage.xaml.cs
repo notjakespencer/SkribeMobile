@@ -3,9 +3,9 @@ using System;
 
 namespace MomentumMaui
 {
-    public partial class HistoryPage : ContentPage
+    public partial class CalendarPage : ContentPage
     {
-        public HistoryPage()
+        public CalendarPage()
         {
             InitializeComponent();
 

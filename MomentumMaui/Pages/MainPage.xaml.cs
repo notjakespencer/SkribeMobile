@@ -124,8 +124,8 @@ namespace MomentumMaui
             // Fall back to updating the active Window.Page or opening a new Window instead
             // of setting Application.Current.MainPage (deprecated).
 
-            var historyPage = new HistoryPage();
-            var navPage = new NavigationPage(historyPage);
+            var calendarPage = new CalendarPage();
+            var navPage = new NavigationPage(calendarPage);
 
             if (this.Window != null)
             {
@@ -142,7 +142,7 @@ namespace MomentumMaui
 
             if (Navigation?.NavigationStack != null)
             {
-                await Navigation.PushAsync(historyPage);
+                await Navigation.PushAsync(calendarPage);
                 return;
             }
 
