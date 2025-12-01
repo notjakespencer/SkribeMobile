@@ -1,4 +1,7 @@
-﻿namespace MomentumMaui
+﻿using Microsoft.Maui;
+using Microsoft.Maui.Controls;
+
+namespace MomentumMaui
 {
     public partial class App : Application
     {
@@ -8,8 +11,14 @@
             
             // Set default theme to Dark
             Application.Current?.UserAppTheme = AppTheme.Dark;
-            
-            MainPage = new AppShell();
+        }
+
+        // Keep the protected accessibility to match the base Application.CreateWindow
+        protected override Window CreateWindow(IActivationState? activationState)
+        {
+            var main = new MainPage();
+            var nav = new NavigationPage(main);
+            return new Window(nav);
         }
 
         public void SetTheme(AppTheme theme)

@@ -2,12 +2,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:MomentumMaui.Controls"
-             x:Class="MomentumMaui.CalendarPage">
+             x:Class="MomentumMaui.CalendarPage"
+             Shell.NavBarIsVisible="False"
+             Title="">
 
   <Grid RowDefinitions="*, Auto">
     <!-- Content -->
-    <ScrollView Grid.Row="0">
-      <VerticalStackLayout Padding="20" Spacing="12">
+    <ScrollView Grid.Row="0" >
+      <VerticalStackLayout Padding="15, 0" Spacing="12" >
         <Label Text="Your Journal History"
                FontAttributes="Bold"
                FontSize="22"
@@ -104,7 +106,20 @@
         </Grid>
 
         <!-- Calendar control (replaces placeholder area) -->
-        <controls:CalendarGrid x:Name="MyCalendar" />
+                <Border Margin="0, 8"
+                        Background="{DynamicResource DarkCard}"
+                        Padding="8" >
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="12" />
+                    </Border.StrokeShape>
+
+                    <controls:CalendarGrid
+                        x:Name="MyCalendar"
+                        BackgroundColor="Transparent"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill" />
+                </Border>
+          
 
         <!-- Mood legend card (compact grid layout) -->
         <Border

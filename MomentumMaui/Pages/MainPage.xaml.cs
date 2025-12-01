@@ -5,6 +5,10 @@ using Momentum.Shared.Data;
 using Momentum.Shared.Services;
 using System;
 using System.Threading.Tasks;
+using Momentum.Shared.Models;
+using System.IO;
+using System.Text.Json;
+using Microsoft.Maui.Storage;
 
 namespace MomentumMaui
 {
@@ -71,9 +75,58 @@ namespace MomentumMaui
             Application.Current?.UserAppTheme = _userStats.Theme == "light" ? AppTheme.Light : AppTheme.Dark;
         }
 
-        private void OnStartClicked(object sender, EventArgs e)
+        // Event handlers for XAML Clicked must return void. Changed from Task to async void.
+        private async void OnSubmitClicked(object sender, EventArgs e)
         {
-            MyTimer.IsActive = true;
+            var response = PromptResponse?.Text?.Trim() ?? string.Empty;
+            if (string.IsNullOrEmpty(response))
+            {
+                await DisplayAlertAsync("No Response", "Please write something before submitting.", "Ok");
+                return;
+            }
+
+            try
+            {
+                var entry = new JournalEntry
+                {
+                    Date = DateTime.UtcNow.Date,
+                    Text = response,
+                    Mood = string.Empty
+                };
+
+                // Persist to a file in the app data directory (one entry per day)
+                var fileName = Path.Combine(FileSystem.AppDataDirectory, $"journal_{DateTime.UtcNow:yyyyMMdd}.json");
+
+                if (File.Exists(fileName))
+                {
+                    // Confirm overwrite
+                    var overwrite = await DisplayAlertAsync("Entry exists",
+                        "An entry for today already exists. Overwrite it?",
+                        "Overwrite", "Cancel");
+                    if (!overwrite) return;
+                }
+
+                var json = JsonSerializer.Serialize(entry, new JsonSerializerOptions { WriteIndented = true });
+                await File.WriteAllTextAsync(fileName, json);
+
+                // Update user stats (XP, streak) and refresh UI
+                _userStats.AddEntry();
+                UpdateUI();
+
+                // Stop timer and disable editing to indicate submission
+                if (MyTimer != null) MyTimer.IsActive = false;
+                if (PromptResponse != null)
+                {
+                    PromptResponse.IsEnabled = false;
+                    PromptResponse.BackgroundColor = (Color)Resources["CardBrush"];
+                }
+
+                await DisplayAlertAsync("Saved", "Your entry was saved successfully.", "OK");
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlertAsync("Error", $"Failed to save entry: {ex.Message}", "OK");
+            }
         }
 
         private void OnStopClicked(object sender, EventArgs e)
@@ -81,7 +134,7 @@ namespace MomentumMaui
             MyTimer.IsActive = false;
         }
 
-        private void OnTimerCompleted(object sender, EventArgs e)
+        private void OnTimerCompleted(object? sender, EventArgs e)
         {
             DisplayAlertAsync("Timer Complete", "The 2-minute timer has finished!", "OK");
         }

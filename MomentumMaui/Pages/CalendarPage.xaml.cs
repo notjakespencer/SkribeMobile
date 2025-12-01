@@ -1,7 +1,14 @@
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.PlatformConfiguration;
+using Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;
 using System;
 using System.Collections.Generic;
 using MomentumMaui.Controls;
+
+// Alias to disambiguate the standard MAUI NavigationPage from the iOS-specific one
+using MauiNavigation = Microsoft.Maui.Controls.NavigationPage;
+// Alias to disambiguate the MAUI Application type from the platform-specific one
+using MauiApplication = Microsoft.Maui.Controls.Application;
 
 namespace MomentumMaui
 {
@@ -11,6 +18,10 @@ namespace MomentumMaui
         {
             InitializeComponent();
             this.Loaded += CalendarPage_Loaded;
+
+            Shell.SetNavBarIsVisible(this, false);
+            this.On<iOS>().SetUseSafeArea(false);
+            // PlatformConfiguration.iOSSpecific.Page.SetSafeAreaEdges(this, SafeAreaEdges.None);
         }
 
         private void CalendarPage_Loaded(object? sender, EventArgs e)
@@ -35,7 +46,7 @@ namespace MomentumMaui
         private async void OnJournalClicked(object sender, EventArgs e)
         {
             var journal = new MainPage();
-            var navPage = new NavigationPage(journal);
+            var navPage = new MauiNavigation(journal);
 
             if (this.Window != null)
             {
@@ -43,7 +54,7 @@ namespace MomentumMaui
                 return;
             }
 
-            var windows = Application.Current?.Windows;
+            var windows = MauiApplication.Current?.Windows;
             if (windows != null && windows.Count > 0)
             {
                 windows[0].Page = navPage;
@@ -57,7 +68,7 @@ namespace MomentumMaui
             }
 
             var newWindow = new Window(navPage);
-            Application.Current?.OpenWindow(newWindow);
+            MauiApplication.Current?.OpenWindow(newWindow);
         }
     }
 }

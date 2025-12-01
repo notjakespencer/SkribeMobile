@@ -219,8 +219,8 @@ namespace MomentumMaui.Controls
                     else
                     {
                         // day without entry
-                        btn.Background = new SolidColorBrush(Color.FromRgb(243, 244, 246)); // secondary card (#F3F4F6)
-                        btn.TextColor = GetResourceColor("MutedForegroundBrush", Colors.Gray);
+                        btn.Background = new SolidColorBrush(Color.FromRgb(41, 37, 36)); // secondary card (#F3F4F6)
+                        btn.TextColor = GetResourceColor("DarkMutedForeground", Colors.Gray);
                         btn.IsEnabled = false;
                         if (isFuture)
                         {

@@ -183,7 +183,7 @@
                 <!-- Buttons to control the timer (row 5) -->
                 <VerticalStackLayout Grid.Row="5" Spacing="8">
                     <Button Text="Complete Entry"
-                            Clicked="OnStartClicked"
+                            Clicked="OnSubmitClicked"
                             HorizontalOptions="Fill" />
 
                     
