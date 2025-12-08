@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.0.11205.157 d18.0
+VisualStudioVersion = 18.0.11205.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MomentumMaui", "MomentumMaui\MomentumMaui.csproj", "{890CEA04-1A57-40CE-9133-BF71082294DE}"
 EndProject
@@ -40,6 +40,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Calendar", "Calendar", "{2C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Momentum.AIAgent", "Momentum.AIAgent\Momentum.AIAgent.csproj", "{F988EE03-0E05-6084-457A-E1C9BDDDA2C8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIAgent", "AIAgent\AIAgent.csproj", "{02FB8035-E66F-4EEE-BB71-BD393791C53D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{F988EE03-0E05-6084-457A-E1C9BDDDA2C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F988EE03-0E05-6084-457A-E1C9BDDDA2C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F988EE03-0E05-6084-457A-E1C9BDDDA2C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02FB8035-E66F-4EEE-BB71-BD393791C53D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02FB8035-E66F-4EEE-BB71-BD393791C53D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02FB8035-E66F-4EEE-BB71-BD393791C53D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02FB8035-E66F-4EEE-BB71-BD393791C53D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

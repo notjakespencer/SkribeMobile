@@ -139,25 +139,45 @@
                 </HorizontalStackLayout>
 
                 <!-- Prompt (row 2) - 20px gap from timer -->
-                <Border x:Name="PromptBorder"
+                <Border x:Name="PromptButton"
                         Grid.Row="3"                        
                         WidthRequest="400"
                         MaximumWidthRequest="600"
                         HorizontalOptions="Center"
                         Margin="0, 20, 0, 5"
+                        Padding="0, 10, 0, 5"
                         Background="{DynamicResource CardBrush}"
                         Stroke="White">
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="12" />
-                    </Border.StrokeShape>
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
 
-                    <Label x:Name="PromptLabel"
-                           Text="Loading Daily Prompt"
-                           HorizontalTextAlignment="Center"
-                           FontSize="18"
-                           Margin="8.25, 6"
-                           TextColor="{DynamicResource MutedForegroundBrush}" />
-                </Border>
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image Source="wand_sparkles.svg"
+                                 WidthRequest="18"
+                                 HeightRequest="18"
+                                 Aspect="AspectFit"
+                                 HorizontalOptions="Center" />
+
+                            <Label x:Name="PromptLabel"
+                                 Text="Loading daily prompt"
+                                 FontSize="18"
+                                 HorizontalTextAlignment="Center"
+                                 LineBreakMode="TailTruncation"
+                                 TextColor="{DynamicResource MutedForegroundBrush}" />
+
+                            <Label x:Name="PromptHintLabel"
+                                 Text="OR CLICK TO GENERATE NEW"
+                                 FontSize="12"
+                                 TextColor="{DynamicResource MutedForegroundBrush}"
+                                 Opacity="0.8"
+                                 HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnPromptClicked" NumberOfTapsRequired="1" />
+                        </Border.GestureRecognizers>
+                    </Border>
 
                 <!-- Prompt Response Box (row 4) - moved ~20px under the Prompt -->
                 <Border Grid.Row="4"

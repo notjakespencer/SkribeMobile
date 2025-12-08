@@ -66,24 +66,35 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="ViewModels\**" />
+	  <AndroidResource Remove="Views\**" />
+	  <Compile Remove="ViewModels\**" />
+	  <Compile Remove="Views\**" />
+	  <EmbeddedResource Remove="ViewModels\**" />
+	  <EmbeddedResource Remove="Views\**" />
+	  <MauiCss Remove="ViewModels\**" />
+	  <MauiCss Remove="Views\**" />
+	  <MauiXaml Remove="ViewModels\**" />
+	  <MauiXaml Remove="Views\**" />
+	  <None Remove="ViewModels\**" />
+	  <None Remove="Views\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Azure.Data.Tables" Version="12.11.0" />
 		<PackageReference Include="Azure.Storage.Blobs" Version="12.27.0-beta.1" />
 		<PackageReference Include="Azure.Storage.Files.Shares" Version="12.25.0-beta.1" />
 		<PackageReference Include="Azure.Storage.Queues" Version="12.25.0-beta.1" />
+		<PackageReference Include="Java" Version="1.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Azure" Version="1.13.1" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="10.0.0" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.10" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.11" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\Momentum.AIAgent\Momentum.AIAgent.csproj" />
 		<ProjectReference Include="..\Momentum.Shared\Momentum.Shared.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="ViewModels\" />
-	  <Folder Include="Views\" />
 	</ItemGroup>
 
 	<ItemGroup>

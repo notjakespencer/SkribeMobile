@@ -1,63 +1,36 @@
-/*
-using Azure;
-using Azure.AI.OpenAI;
-using Azure.Identity;
-using Microsoft.Agents.AI;
-using Microsoft.Extensions.AI;
-//using Azure.AI.Agents.Persistent;
-using Microsoft.Extensions.Configuration;
-using OpenAI;
 using System;
-using System.ClientModel;
-using System.ComponentModel;
-using System.Threading;
 using System.Threading.Tasks;
+using Momentum.AIAgent.Services;
 
-// var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
-var endpoint = Environment.GetEnvironmentVariable("AZURE_OPENAI_ENDPOINT") ?? throw new InvalidOperationException("AZURE_OPENAI_ENDPOINT is not set");
-var deploymentName = System.Environment.GetEnvironmentVariable("AZURE_OPENAI_DEPLOYMENT_NAME") ?? "gpt-4.1";
-
-
-string endpoint = config["endpoint"];
-string key = config["key"];
-
-
-AIAgent agent = new AzureOpenAIClient(
-    new Uri(endpoint),
-    new AzureCliCredential())
-    .GetChatClient(deploymentName)
-    .CreateAIAgent(
-            name: "Journal",
-            instructions: """
-            You are an AI assistant for the Momentum journaling app. 
-            Your role is to provide a single, thought-provoking, and personalized journal prompt to the user.
-            Analyze the user's past journal entries to understand their recent thoughts, feelings, and activities.
-            Based on this analysis, create a new, relevant prompt that encourages reflection or exploration of new ideas.
-            Do not ask a question you have already asked.
-            The prompt should be a single sentence.
-            """);
-
-Console.WriteLine("Welcome to the Momentum App.\r\nType /exit to quit.");
-
-while (true)
+internal static class Program
 {
-    Console.Write("> ");
-    var input = Console.ReadLine();
-    if (input is null) break; // EOF
-    input = input.Trim();
-    if (input.Length == 0) continue;
-    if (input.Equals("/exit", StringComparison.OrdinalIgnoreCase)) break;
-
-    try
+    static async Task<int> Main(string[] args)
     {
-        var response = await agent.RunAsync(input);
-        Console.WriteLine(response?.ToString() ?? "<no response>");
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Error: {ex.Message}");
-    }
+        try
+        {
+            Console.WriteLine("Starting PromptGeneratorService test...");
 
-    //take response and parse it into the mortgage class
-}*/
+            // Ensure AZURE_OPENAI_ENDPOINT and AZURE_OPENAI_DEPLOYMENT_NAME are set in your environment
+            var generator = new PromptGeneratorService();
+
+            var userContext = args.Length > 0 ? string.Join(' ', args) : "User has been stressed at work this week";
+
+            Console.WriteLine("Requesting prompt from AI...");
+            var prompt = await generator.GeneratePromptAsync(userContext);
+
+            Console.WriteLine();
+            Console.WriteLine("=== Generated Prompt ===");
+            Console.WriteLine(prompt);
+            Console.WriteLine("========================");
+
+            return 0;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error running PromptGeneratorService:");
+            Console.WriteLine(ex.ToString());
+            return 1;
+        }
+    }
+}
 

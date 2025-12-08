@@ -9,6 +9,7 @@ using Momentum.Shared.Models;
 using System.IO;
 using System.Text.Json;
 using Microsoft.Maui.Storage;
+using Momentum.AIAgent.Services;
 
 namespace MomentumMaui
 {
@@ -54,6 +55,7 @@ namespace MomentumMaui
 
         protected override void OnAppearing()
         {
+            System.Diagnostics.Debug.WriteLine(Environment.GetEnvironmentVariable("AZURE_OPENAI_ENDPOINT"));
             base.OnAppearing();
 
             var prompt = PromptRepository.GetRandomPrompt();
@@ -90,8 +92,8 @@ namespace MomentumMaui
                 var entry = new JournalEntry
                 {
                     Date = DateTime.UtcNow.Date,
-                    Text = response,
-                    Mood = string.Empty
+                    EntryText = response,
+                    Mood = MoodType.Neutral
                 };
 
                 // Persist to a file in the app data directory (one entry per day)
@@ -226,6 +228,39 @@ namespace MomentumMaui
             if (string.IsNullOrEmpty(oldText) && !string.IsNullOrEmpty(newText))
             {
                 MyTimer.IsActive = true;
+            }
+        }
+
+        private async void OnPromptClicked(object? sender, EventArgs e)
+        {
+            if (PromptButton == null || PromptLabel == null) return;
+            if (!PromptButton.IsEnabled) return;
+
+            PromptButton.IsEnabled = false;
+            var previousText = PromptLabel.Text;
+            PromptLabel.Text = "Generating...";
+
+            try
+            {
+                var userContext = PromptResponse?.Text?.Trim();
+                var generator = new PromptGeneratorService();
+
+                // Call AI
+                var aiPrompt = await generator.GeneratePromptAsync(userContext);
+
+                if (!string.IsNullOrWhiteSpace(aiPrompt)) PromptLabel.Text = aiPrompt.Trim();
+                else PromptLabel.Text = previousText ?? "No Prompt returned";
+            }
+
+            catch (Exception ex)
+            {
+                PromptLabel.Text = previousText ?? "Error generating new prompt";
+                await DisplayAlertAsync("AI Error", $"Failed to generate prompt: {ex.Message}", "OK");
+            }
+
+            finally
+            {
+                PromptButton.IsEnabled = true;
             }
         }
     }
