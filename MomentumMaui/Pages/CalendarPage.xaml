@@ -44,7 +44,7 @@
 
             <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
               <VerticalStackLayout Spacing="2" VerticalOptions="Center">
-                <Label Text="0" FontAttributes="Bold" FontSize="16" />
+                <Label x:Name="TotalEntriesLabel" Text="0" FontAttributes="Bold" FontSize="16" />
                 <Label Text="Total Entries" FontSize="12" TextColor="{DynamicResource MutedForegroundBrush}" />
               </VerticalStackLayout>
             </HorizontalStackLayout>
@@ -62,7 +62,7 @@
 
             <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
               <VerticalStackLayout Spacing="2" VerticalOptions="Center">
-                <Label Text="0" FontAttributes="Bold" FontSize="16" />
+                <Label x:Name="CurrentStreakLabel" Text="0" FontAttributes="Bold" FontSize="16" />
                 <Label Text="Current Streak" FontSize="12" TextColor="{DynamicResource MutedForegroundBrush}" />
               </VerticalStackLayout>
             </HorizontalStackLayout>
@@ -80,7 +80,7 @@
 
             <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
               <VerticalStackLayout Spacing="2" VerticalOptions="Center">
-                <Label Text="0" FontAttributes="Bold" FontSize="16" />
+                <Label x:Name="LongestStreakLabel" Text="0" FontAttributes="Bold" FontSize="16" />
                 <Label Text="Longest Streak" FontSize="12" TextColor="{DynamicResource MutedForegroundBrush}" />
               </VerticalStackLayout>
             </HorizontalStackLayout>
@@ -96,10 +96,21 @@
               <RoundRectangle CornerRadius="12" />
             </Border.StrokeShape>
 
-            <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
-              <VerticalStackLayout Spacing="2" VerticalOptions="Center">
-                <Label Text="1" FontAttributes="Bold" FontSize="16" />
-                <Label Text="Current Level" FontSize="12" TextColor="{DynamicResource MutedForegroundBrush}" />
+            <HorizontalStackLayout Spacing="8" 
+                                   VerticalOptions="Center">
+                
+              <VerticalStackLayout Spacing="2" 
+                                   VerticalOptions="Center">
+                  
+                <Label x:Name="CurrentLevelLabel" 
+                       Text="1" 
+                       FontAttributes="Bold" 
+                       FontSize="16" />
+                  
+                <Label Text="Current Level" 
+                       FontSize="12" 
+                       TextColor="{DynamicResource MutedForegroundBrush}" />
+                  
               </VerticalStackLayout>
             </HorizontalStackLayout>
           </Border>
@@ -107,7 +118,7 @@
 
         <!-- Calendar control (replaces placeholder area) -->
                 <Border Margin="0, 8"
-                        Background="{DynamicResource DarkCard}"
+                        Background="{DynamicResource CardBrush}"
                         Padding="8" >
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="12" />
@@ -119,7 +130,7 @@
                         HorizontalOptions="Fill"
                         VerticalOptions="Fill" />
                 </Border>
-          
+
 
         <!-- Mood legend card (compact grid layout) -->
         <Border
@@ -145,53 +156,105 @@
               </Grid.RowDefinitions>
 
               <!-- Amazing -->
-              <HorizontalStackLayout Grid.Row="0" Grid.Column="0" Spacing="8" VerticalOptions="Center">
-                <Border WidthRequest="12" HeightRequest="12" Padding="0" Background="#10B981">
+              <HorizontalStackLayout Grid.Row="0"
+                                     Grid.Column="0"
+                                     Spacing="8" 
+                                     VerticalOptions="Center">
+                  
+                <Border WidthRequest="12" 
+                        HeightRequest="12" 
+                        Padding="0" 
+                        Background="#10B981">
+                    
                   <Border.StrokeShape>
                     <RoundRectangle CornerRadius="6" />
                   </Border.StrokeShape>
                 </Border>
-                <Label Text="Amazing" VerticalTextAlignment="Center" />
+                  
+                <Label Text="Amazing" 
+                       VerticalTextAlignment="Center" />
               </HorizontalStackLayout>
 
               <!-- Good -->
-              <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Spacing="8" VerticalOptions="Center">
-                <Border WidthRequest="12" HeightRequest="12" Padding="0" Background="#84CC16">
+              <HorizontalStackLayout Grid.Row="0"
+                                     Grid.Column="1" 
+                                     Spacing="8" 
+                                     VerticalOptions="Center">
+                  
+                <Border WidthRequest="12" 
+                        HeightRequest="12" 
+                        Padding="0" 
+                        Background="#84CC16">
+                    
                   <Border.StrokeShape>
                     <RoundRectangle CornerRadius="6" />
                   </Border.StrokeShape>
                 </Border>
-                <Label Text="Good" VerticalTextAlignment="Center" />
+                  
+                <Label Text="Good" 
+                       VerticalTextAlignment="Center" />
               </HorizontalStackLayout>
 
               <!-- Okay -->
-              <HorizontalStackLayout Grid.Row="1" Grid.Column="0" Spacing="8" VerticalOptions="Center">
-                <Border WidthRequest="12" HeightRequest="12" Padding="0" Background="#F59E0B">
+              <HorizontalStackLayout Grid.Row="1" 
+                                     Grid.Column="0" 
+                                     Spacing="8" 
+                                     VerticalOptions="Center">
+                  
+                <Border WidthRequest="12" 
+                        HeightRequest="12" 
+                        Padding="0" 
+                        Background="#F59E0B">
+                    
                   <Border.StrokeShape>
                     <RoundRectangle CornerRadius="6" />
                   </Border.StrokeShape>
                 </Border>
-                <Label Text="Okay" VerticalTextAlignment="Center" />
+                  
+                <Label Text="Okay" 
+                       VerticalTextAlignment="Center" />
               </HorizontalStackLayout>
 
               <!-- Tough -->
-              <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Spacing="8" VerticalOptions="Center">
-                <Border WidthRequest="12" HeightRequest="12" Padding="0" Background="#F97316">
+              <HorizontalStackLayout Grid.Row="1" 
+                                     Grid.Column="1" 
+                                     Spacing="8" 
+                                     VerticalOptions="Center">
+                  
+                <Border WidthRequest="12" 
+                        HeightRequest="12" 
+                        Padding="0" 
+                        Background="#F97316">
+                    
                   <Border.StrokeShape>
                     <RoundRectangle CornerRadius="6" />
-                  </Border.StrokeShape>
+                  </Border.StrokeShape>                    
                 </Border>
-                <Label Text="Tough" VerticalTextAlignment="Center" />
+                  
+                <Label Text="Tough" 
+                       VerticalTextAlignment="Center" />
               </HorizontalStackLayout>
 
               <!-- Difficult (span two columns) -->
-              <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Spacing="8" VerticalOptions="Center">
-                <Border WidthRequest="12" HeightRequest="12" Padding="0" Background="#EF4444">
+              <HorizontalStackLayout Grid.Row="2" 
+                                     Grid.Column="0" 
+                                     Grid.ColumnSpan="2" 
+                                     Spacing="8" 
+                                     VerticalOptions="Center">
+                  
+                <Border WidthRequest="12" 
+                        HeightRequest="12" 
+                        Padding="0" 
+                        Background="#EF4444">
+                    
                   <Border.StrokeShape>
                     <RoundRectangle CornerRadius="6" />
                   </Border.StrokeShape>
                 </Border>
-                <Label Text="Difficult" VerticalTextAlignment="Center" />
+                  
+                <Label Text="Difficult" 
+                       VerticalTextAlignment="Center" />
+                  
               </HorizontalStackLayout>
             </Grid>
           </VerticalStackLayout>
@@ -205,7 +268,7 @@
             Padding="10"
             Background="{AppThemeBinding Light={StaticResource LightCard}, Dark={StaticResource DarkBackground}}" >
             <HorizontalStackLayout Spacing="12" HorizontalOptions="Center" VerticalOptions="Center">
-                
+
         <ImageButton
             x:Name="JournalImageButton"
             Source="book_open.svg"

@@ -21,6 +21,8 @@
     <Color x:Key="DarkAccent">#292524</Color>
     <Color x:Key="DarkAccentForeground">#FAFAF9</Color>
     <Color x:Key="DarkBorder"></Color>
+    <Color x:Key="DarkCalendar">#292524</Color>
+    <Color x:Key="DarkText">#FFFFFF</Color>
     
 
     <!-- LIGHT THEME -->
@@ -37,6 +39,8 @@
     <Color x:Key="LightAccent">#F5F5F4</Color>
     <Color x:Key="LightAccentForeground">#1C1917</Color>
     <Color x:Key="LightBorder">#E7E5E4</Color>
+    <Color x:Key="LightCalendar">#D6D6D6</Color>
+    <Color x:Key="LightText">#000000</Color>
 
     <!-- Gradient brushes for moods -->
     <LinearGradientBrush x:Key="MoodAmazingBrush" StartPoint="0,0" EndPoint="1,1">
@@ -117,7 +121,9 @@
     <SolidColorBrush x:Key="AccentBrush" Color="{AppThemeBinding Light={StaticResource LightAccent}, Dark={StaticResource DarkAccent}}" />
     <SolidColorBrush x:Key="AccentForegroundBrush" Color="{AppThemeBinding Light={StaticResource LightAccentForeground}, Dark={StaticResource DarkAccentForeground}}" />
     <SolidColorBrush x:Key="BorderBrush" Color="{AppThemeBinding Light={StaticResource LightBorder}, Dark={StaticResource DarkBorder}}" />
-    
+    <SolidColorBrush x:Key="CalendarBrush" Color="{AppThemeBinding Light={StaticResource LightCalendar}, Dark={StaticResource DarkCalendar}}" />
+    <SolidColorBrush x:Key="TextBrush" Color="{AppThemeBinding Light={StaticResource LightText}, Dark={StaticResource DarkText}}" />
+
     <!-- Legacy Brushes (for backward compatibility) -->
     <SolidColorBrush x:Key="Gray100Brush" Color="{StaticResource Gray100}"/>
     <SolidColorBrush x:Key="Gray200Brush" Color="{StaticResource Gray200}"/>

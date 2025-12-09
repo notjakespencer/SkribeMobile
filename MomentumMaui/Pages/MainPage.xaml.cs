@@ -3,14 +3,15 @@ using Microsoft.Maui.Controls;
 using MomentumMaui.Controls;
 using Momentum.Shared.Data;
 using Momentum.Shared.Services;
+using MomentumMaui.Services;
+using Momentum.Shared.Models;
+using Momentum.AIAgent.Services;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Momentum.Shared.Models;
 using System.IO;
 using System.Text.Json;
 using Microsoft.Maui.Storage;
-using Momentum.AIAgent.Services;
 using Microsoft.Maui.Graphics;
 
 namespace MomentumMaui
@@ -426,6 +427,13 @@ namespace MomentumMaui
                 // Mark completed so user cannot complete again today
                 MarkCompletedToday();
                 ApplyCompletionStateToUi();
+
+                // Publish a lightweight message so other pages (Calendar) can refresh immediately
+                try
+                {
+                    NotificationService.NotifyEntrySaved(DateTime.Now);
+                }
+                catch { /* safe to ignore notification errors */ }
 
                 return true;
             }

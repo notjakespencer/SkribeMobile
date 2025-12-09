@@ -15,6 +15,6 @@
           ColumnDefinitions="*,*,*,*,*,*,*"
           RowSpacing="6"
           ColumnSpacing="6"
-          Padding="0,4"/>
+          Padding="0,4" />
     </VerticalStackLayout>
 </ContentView>
