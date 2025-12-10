@@ -21,7 +21,7 @@
 		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>MomentumMaui</ApplicationTitle>
+		<ApplicationTitle>SKRIBE</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.momentummaui</ApplicationId>
