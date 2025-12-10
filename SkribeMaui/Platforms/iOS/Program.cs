@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace SKRIBE.Platforms.iOS
+namespace Skribe.Platforms.iOS
 {
     public class Program
     {
