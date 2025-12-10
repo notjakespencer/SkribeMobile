@@ -2,7 +2,7 @@
 
 A .NET MAUI mobile application for daily journaling with AI-powered prompts, mood tracking, and progress visualization.
 
-<!-- Screenshot placeholders: replace with real images in Resources/Docs/images/ -->
+## 👉 [Installation & Testing Guide](INSTALL.md)
 
 ![Splash Page](SkribeMaui/Resources/Docs/images/splash.png) ![Main Page](SkribeMaui/Resources/Docs/images/main_page.png) ![Mood Selection](SkribeMaui/Resources/Docs/images/mood_page.png)
 
