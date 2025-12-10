@@ -1,0 +1,456 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:SkribeMaui.Controls"
+             x:Class="SkribeMaui.MainPage"
+             Title=""
+             Shell.NavBarIsVisible="False"
+             Background="{AppThemeBinding Light={StaticResource LightCard}, Dark={StaticResource DarkCard}}">
+
+    <Grid RowDefinitions="*, Auto" ColumnDefinitions="*">
+        <!-- Named the main content so we can hide it while success card remains visible -->
+        <Border x:Name="MainContent"
+                Background="{StaticResource BackgroundBrush}"
+                Grid.Row="0"
+                Stroke="Transparent"
+                StrokeThickness="0">
+            <ScrollView Grid.Row="0">
+                <!-- Use two weighted spacers with different weights so the timer sits below center
+                     but not too low. Adjust the '*' weights to tune the vertical position. -->
+                <Grid RowDefinitions="Auto, Auto, Auto, Auto, *, *" ColumnDefinitions="*"
+                      Padding="25,12" RowSpacing="18">
+
+                    <!-- Stats Header (row 0) -->
+                    <Grid Grid.Row="0" Margin="0,4,0,0" HorizontalOptions="Fill" ColumnDefinitions="Auto,*,Auto" VerticalOptions="Start">
+                        <HorizontalStackLayout Grid.Column="0" Spacing="12" VerticalOptions="Center">
+
+                            <!-- Streak -->
+                            <Border
+                                Background="{DynamicResource CardBrush}"
+                                Padding="10"
+                                VerticalOptions="Center"
+                                HeightRequest="84">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="12" />
+                                </Border.StrokeShape>
+                                <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                                    <Image x:Name="StreakIcon"
+                                           WidthRequest="28"
+                                           HeightRequest="28"
+                                           Aspect="AspectFit"
+                                           Source="flame_dark.svg" />
+                                    <VerticalStackLayout Spacing="2" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="76">
+                                        <Label x:Name="StreakLabel"
+                                               Text="0"
+                                               FontSize="18"
+                                               FontAttributes="Bold"
+                                               HorizontalTextAlignment="Center" />
+                                        <Label Text="DAY STREAK"
+                                               FontSize="12"
+                                               HorizontalTextAlignment="Center"
+                                               TextColor="{DynamicResource MutedForegroundBrush}"/>
+                                    </VerticalStackLayout>
+                                </HorizontalStackLayout>
+                            </Border>
+
+                            <!-- Level & XP -->
+                            <Border
+                                Background="{DynamicResource CardBrush}"
+                                Padding="10"
+                                VerticalOptions="Center">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="12" />
+                                </Border.StrokeShape>
+                                <VerticalStackLayout Spacing="8" VerticalOptions="Center" HorizontalOptions="Center">
+                                    <HorizontalStackLayout Spacing="8" VerticalOptions="Center" HorizontalOptions="Center">
+                                        <Image x:Name="XpIcon"
+                                               WidthRequest="20"
+                                               HeightRequest="20"
+                                               Aspect="AspectFit"
+                                               Source="zap.svg" />
+                                        <Label x:Name="LevelLabel"
+                                               Text="LEVEL 1"
+                                               FontSize="16"
+                                               VerticalTextAlignment="Center"
+                                               HorizontalTextAlignment="Center"/>
+                                    </HorizontalStackLayout>
+
+                                    <ProgressBar x:Name="XpProgressBar"
+                                                 Progress="0"
+                                                 WidthRequest="120"
+                                                 HeightRequest="6"
+                                                 HorizontalOptions="Fill"/>
+
+                                    <Label x:Name="XpLabel"
+                                           Text="0 / 100 XP"
+                                           FontSize="12"
+                                           HorizontalTextAlignment="Center"
+                                           TextColor="{DynamicResource MutedForegroundBrush}"/>
+                                </VerticalStackLayout>
+                            </Border>
+                        </HorizontalStackLayout>
+
+                        <!-- Theme Toggle -->
+                        <Border Grid.Column="2"
+                               Background="{DynamicResource CardBrush}"
+                               Padding="15"
+                               HeightRequest="65"
+                               WidthRequest="65"
+                               VerticalOptions="Center"
+                               HorizontalOptions="End">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="50" />
+                            </Border.StrokeShape>
+                            <controls:AnimatedThemeIcon
+                                x:Name="ThemeButton"
+                                LightSource="moon.svg"
+                                DarkSource="sun.svg"
+                                Duration="300"
+                                AnimateOnInitial="True">
+                                <controls:AnimatedThemeIcon.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnThemeToggleClicked" />
+                                </controls:AnimatedThemeIcon.GestureRecognizers>
+                            </controls:AnimatedThemeIcon>
+                        </Border>
+                    </Grid>
+
+                    <!-- Small flexible spacer (row 1) -->
+
+                    <!-- Timer Control (row 2) - nudged slightly higher -->
+                    <controls:TimerControl Grid.Row="1"
+                                           x:Name="MyTimer"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"
+                                           Margin="0,25,0,0" />
+
+                    <HorizontalStackLayout Grid.Row="2"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"
+                                           Spacing="8"
+                                           Margin="0, 0, 0, 0">
+                        <Image Source="clock.svg"
+                               WidthRequest="14"
+                               HeightRequest="14"
+                               Aspect="AspectFit"
+                               VerticalOptions="Center"
+                               AutomationProperties.IsInAccessibleTree="True"
+                               AutomationProperties.Name="Clock icon" />
+                        <Label x:Name="TimerHintLabel"
+                               Text="Start typing to begin"
+                               HorizontalTextAlignment="Center"
+                               FontSize="14"
+                               TextColor="{DynamicResource MutedForegroundBrush}"
+                               VerticalTextAlignment="Center"/>
+                    </HorizontalStackLayout>
+
+                    <!-- Prompt (row 2) - 20px gap from timer -->
+                    <Border x:Name="PromptButton"
+                            Grid.Row="3"
+                            WidthRequest="400"
+                            MaximumWidthRequest="600"
+                            HorizontalOptions="Center"
+                            Margin="0, 5, 0, 5"
+                            Padding="0, 10, 0, 5"
+                            Background="{DynamicResource CardBrush}" >
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image Source="wand_sparkles.svg"
+                                   WidthRequest="18"
+                                   HeightRequest="18"
+                                   Aspect="AspectFit"
+                                   HorizontalOptions="Center" />
+
+                            <Label x:Name="PromptLabel"
+                                   Text="Loading daily prompt"
+                                   FontSize="18"
+                                   HorizontalTextAlignment="Center"
+                                   LineBreakMode="WordWrap"
+                                   MaxLines="3"
+                                   Margin="0, 0, 0, 15"
+                                   TextColor="{DynamicResource MutedForegroundBrush}" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Prompt Response Box (row 4) - moved ~20px under the Prompt -->
+                    <Border Grid.Row="4"
+                            Margin="0, 5, 0, 0"
+                            WidthRequest="400"
+                            HeightRequest="250"
+                            HorizontalOptions="Center"
+                            Padding="6"
+                            Background="{DynamicResource CardBrush}" >
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+
+                        <Editor x:Name="PromptResponse"
+                            AutoSize="TextChanges"
+                            Placeholder="Start writing your thoughts..."
+                            FontSize="18"
+                            BackgroundColor="{DynamicResource CardBrush}"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="Start" />
+                    </Border>
+
+                    <!-- Submission Button -->
+                    <VerticalStackLayout Grid.Row="5" Spacing="8">
+                        <Button x:Name="CompleteButton"
+                                Text="Complete Entry"
+                                Clicked="OnSubmitClicked"
+                                HorizontalOptions="Fill" />
+                    </VerticalStackLayout>
+
+                </Grid>
+            </ScrollView>
+        </Border>
+
+        <!-- Success overlay limited to the main content row only -->
+        <Grid x:Name="SuccessOverlay"
+              Grid.Row="0"
+              Grid.RowSpan="1"
+              IsVisible="False"
+              HorizontalOptions="Fill"
+              VerticalOptions="Fill"
+              Background="{DynamicResource BackgroundBrush}"
+              AutomationProperties.IsInAccessibleTree="True"
+              AutomationProperties.Name="Success overlay">
+          <!-- center the success card -->
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+          </Grid.ColumnDefinitions>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+          </Grid.RowDefinitions>
+
+          <!-- Rounded success card -->
+          <Border Background="{DynamicResource CardBrush}"
+                  Stroke="Transparent"
+                  Padding="16"
+                  HorizontalOptions="Center"
+                  VerticalOptions="Center"
+                  WidthRequest="360"
+                  AutomationProperties.IsInAccessibleTree="True"
+                  AutomationProperties.Name="Success card">
+            <Border.StrokeShape>
+              <RoundRectangle CornerRadius="20" />
+            </Border.StrokeShape>
+
+            <VerticalStackLayout Spacing="12">
+              <Grid HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,6">
+                <AbsoluteLayout 
+                    WidthRequest="84" 
+                    HeightRequest="84" 
+                    HorizontalOptions="Center" 
+                    VerticalOptions="Center" 
+                    Margin="0,20,0,40">
+                  <Ellipse WidthRequest="100" 
+                           HeightRequest="100"
+                           AbsoluteLayout.LayoutBounds="0.5,0.5,84,84"
+                           AbsoluteLayout.LayoutFlags="PositionProportional">
+                    <Ellipse.Fill>
+                      <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#4ADE80" Offset="0" />
+                        <GradientStop Color="#10B981" Offset="1" />
+                      </LinearGradientBrush>
+                    </Ellipse.Fill>
+                  </Ellipse>
+
+                  <Image Source="circle_check.svg"
+                         WidthRequest="60"
+                         HeightRequest="60"
+                         Aspect="AspectFit"
+                         AbsoluteLayout.LayoutBounds="0.5,0.5,40,40"
+                         AbsoluteLayout.LayoutFlags="PositionProportional" />
+                </AbsoluteLayout>
+              </Grid>
+
+              <Label Text="You did it!   🎉"
+                     FontSize="20"
+                     FontAttributes="Bold"
+                     HorizontalTextAlignment="Center" />
+
+              <Label Text="You've completed today's journal entry. Come back tomorrow for a new prompt!"
+                     FontSize="14"
+                     HorizontalTextAlignment="Center"
+                     TextColor="{DynamicResource MutedForegroundBrush}" />
+
+              <!-- Mood display -->
+              <Label x:Name="CompletionMoodLabel"
+                     Text="—"
+                     FontSize="18"
+                     FontAttributes="Bold"
+                     HorizontalTextAlignment="Center"
+                     IsVisible="False" />
+
+              <Border Background="{DynamicResource BackgroundBrush}"
+                      Padding="12"
+                      Margin="0,8,0,0">
+                <Border.StrokeShape>
+                  <RoundRectangle CornerRadius="12" />
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="6">
+                  <Label Text="Entry completed:"
+                         FontSize="12"
+                         TextColor="{DynamicResource MutedForegroundBrush}" />
+                  <Label x:Name="CompletionTimeLabel"
+                         Text="--:--"
+                         FontSize="16"
+                         FontAttributes="Bold" />
+                </VerticalStackLayout>
+              </Border>
+
+            </VerticalStackLayout>
+          </Border>
+        </Grid>
+
+        <!-- Mood overlay (must be declared after SuccessOverlay so it appears on top of main content) -->
+        <Grid x:Name="MoodOverlay"
+              Grid.Row="0"
+              Grid.RowSpan="1"
+              IsVisible="False"
+              HorizontalOptions="Fill"
+              VerticalOptions="Fill"
+              Background="#80000000"
+              AutomationProperties.IsInAccessibleTree="True"
+              AutomationProperties.Name="Mood selection overlay">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.05*" />
+            <ColumnDefinition Width="0.90*" />
+            <ColumnDefinition Width="0.05*" />
+          </Grid.ColumnDefinitions>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="0.05*" />
+            <RowDefinition Height="0.90*" />
+            <RowDefinition Height="0.05*" />
+          </Grid.RowDefinitions>
+
+          <Border Grid.Column="1" Grid.Row="1"
+                  Background="{DynamicResource CardBrush}"
+                  Stroke="Transparent"
+                  Padding="16"
+                  HorizontalOptions="Fill"
+                  VerticalOptions="Fill">
+            <Border.StrokeShape>
+              <RoundRectangle CornerRadius="20" />
+            </Border.StrokeShape>
+
+            <VerticalStackLayout Spacing="12">
+              <Label Text="How are you feeling today?"
+                     FontSize="24"
+                     HorizontalTextAlignment="Center"
+                     FontAttributes="Bold" />
+
+              <Label Text="Choose the mood that best describes your day"
+                     Opacity="0.8"
+                     FontSize="14"
+                     HorizontalTextAlignment="Center"
+                     TextColor="{DynamicResource MutedForegroundBrush}" />
+
+              <VerticalStackLayout Spacing="8" Margin="0,8,0,0">
+                <Button Text="🤩 Amazing"
+                        Background="{StaticResource MoodAmazingBrush}"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        TextColor="White"
+                        CornerRadius="12"
+                        HeightRequest="72"
+                        Clicked="OnMoodSelected"
+                        Pressed="OnMoodPressed"
+                        Released="OnMoodReleased"/>
+
+                <Button Text="😊 Good"
+                        Background="{StaticResource MoodGoodBrush}"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        TextColor="White"
+                        CornerRadius="12"
+                        HeightRequest="72"
+                        Clicked="OnMoodSelected"
+                        Pressed="OnMoodPressed"
+                        Released="OnMoodReleased"/>
+
+                <Button Text="😐 Okay"
+                        Background="{StaticResource MoodOkayBrush}"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        TextColor="White"
+                        CornerRadius="12"
+                        HeightRequest="72"
+                        Clicked="OnMoodSelected"
+                        Pressed="OnMoodPressed"
+                        Released="OnMoodReleased" />
+
+                <Button Text="😔 Tough"
+                        Background="{StaticResource MoodToughBrush}"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        TextColor="White"
+                        CornerRadius="12"
+                        HeightRequest="72"
+                        Clicked="OnMoodSelected"
+                        Pressed="OnMoodPressed"
+                        Released="OnMoodReleased"/>
+
+                <Button Text="😢 Difficult"
+                        Background="{StaticResource MoodDifficultBrush}"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        TextColor="White"
+                        CornerRadius="12"
+                        HeightRequest="72"
+                        Clicked="OnMoodSelected"
+                        Pressed="OnMoodPressed"
+                        Released="OnMoodReleased"/>
+              </VerticalStackLayout>
+            </VerticalStackLayout>
+          </Border>
+        </Grid>
+
+        <!-- Footer / bottom bar: keep this declared after the overlay so it remains visible -->
+        <Border Grid.Row="1"
+               Padding="10"
+               Background="{AppThemeBinding Light={StaticResource LightCard}, Dark={StaticResource DarkCard}}"
+               Stroke="Transparent">
+            <HorizontalStackLayout Spacing="12" HorizontalOptions="Center" VerticalOptions="Center">
+                <!-- Journal -->
+                <ImageButton
+                    x:Name="JournalImageButton"
+                    Source="book_open.png"
+                    Clicked="OnJournalClicked"
+                    BackgroundColor="Transparent"
+                    WidthRequest="36"
+                    HeightRequest="36"
+                    Aspect="AspectFit"
+                    Margin="0, 0, 75, 0" 
+                    AutomationProperties.IsInAccessibleTree="True"
+                    AutomationProperties.Name="Journal" />
+
+                <!-- RESET (TEST) button  REMOVE BEFORE DEPLOYMENT
+                <Button x:Name="ResetProgressButton"
+                        Text="Reset (Test)"
+                        Clicked="OnResetProgressClicked"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="120"
+                        IsVisible="True" />
+                -->
+
+                <!-- History -->
+                <ImageButton
+                    x:Name="HistoryImageButton"
+                    Source="calendar.svg"
+                    Clicked="OnHistoryClicked"
+                    BackgroundColor="Transparent"
+                    WidthRequest="36"
+                    HeightRequest="36"
+                    Aspect="AspectFit"
+                    Margin="75, 0, 0, 0"
+                    AutomationProperties.IsInAccessibleTree="True"
+                    AutomationProperties.Name="History" />
+            </HorizontalStackLayout>
+        </Border>
+    </Grid>
+</ContentPage>

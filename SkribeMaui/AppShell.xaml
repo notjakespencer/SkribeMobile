@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="SkribeMaui.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:SkribeMaui"
+    Title="Skribe"
+    Shell.BackgroundColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}"
+    Shell.ForegroundColor="{AppThemeBinding Light={StaticResource LightForeground}, Dark={StaticResource DarkForeground}}"
+    Shell.TitleColor="{AppThemeBinding Light={StaticResource LightForeground}, Dark={StaticResource DarkForeground}}">
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+</Shell>
