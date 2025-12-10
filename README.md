@@ -1,19 +1,19 @@
-# SKRIBE — Daily Journaling (MomentumMaui)
+# SKRIBE — Daily Journaling (Skribe)
 
 A .NET MAUI mobile application for daily journaling with AI-powered prompts, mood tracking, and progress visualization.
 
 <!-- Screenshot placeholders: replace with real images in Resources/Docs/images/ -->
 
-![Splash Page](MomentumMaui/Resources/Docs/images/splash.png) ![Main Page](MomentumMaui/Resources/Docs/images/main_page.png) ![Mood Selection](MomentumMaui/Resources/Docs/images/mood_page.png)
+![Splash Page](SkribeMaui/Resources/Docs/images/splash.png) ![Main Page](SkribeMaui/Resources/Docs/images/main_page.png) ![Mood Selection](SkribeMaui/Resources/Docs/images/mood_page.png)
 
- ![Sucess Page](MomentumMaui/Resources/Docs/images/success_page.png)![History / Calendar Page](MomentumMaui/Resources/Docs/images/calendar_page.png) ![Entry Modal](MomentumMaui/Resources/Docs/images/entry_modal.png)
+ ![Sucess Page](SkribeMaui/Resources/Docs/images/success_page.png)![History / Calendar Page](SkribeMaui/Resources/Docs/images/calendar_page.png) ![Entry Modal](SkribeMaui/Resources/Docs/images/entry_modal.png)
 
 
 
 Summary
 
 - Platform: .NET 10, .NET MAUI (Android, iOS / MacCatalyst, Windows)
-- App title: `SKRIBE` (configured in `MomentumMaui.csproj`)
+- App title: `SKRIBE` (configured in `SkribeMaui.csproj`)
 
 
 Key features (current build)
@@ -61,7 +61,7 @@ Future Features
 - Calendar export and analytics: export mood history and XP progress; visual analytics for streaks and writing habits.
 Build & run (local)
 
-1. Open `MomentumMaui.sln` in Visual Studio (2022/2023) or use the CLI.
+1. Open `SkribeMaui.sln` in Visual Studio (2022/2023) or use the CLI.
 2. Select target device/emulator and Run (F5) from Visual Studio.
 
 CLI examples
