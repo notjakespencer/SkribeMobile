@@ -1,6 +1,7 @@
 ﻿using Foundation;
+using SKRIBE;
 
-namespace MomentumMaui
+namespace SKRIBE.Platforms.iOS
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

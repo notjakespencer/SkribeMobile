@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
 VisualStudioVersion = 18.0.11205.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MomentumMaui", "MomentumMaui\MomentumMaui.csproj", "{890CEA04-1A57-40CE-9133-BF71082294DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkribeMaui", "MomentumMaui\SkribeMaui.csproj", "{890CEA04-1A57-40CE-9133-BF71082294DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Momentum.Shared", "Momentum.Shared\Momentum.Shared.csproj", "{C36CCBE4-078E-47A4-B852-DB5C3E0845A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skribe.Shared", "Momentum.Shared\Skribe.Shared.csproj", "{C36CCBE4-078E-47A4-B852-DB5C3E0845A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Momentum.AIAgent", "Momentum.AIAgent\Momentum.AIAgent.csproj", "{F988EE03-0E05-6084-457A-E1C9BDDDA2C8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skribe.AIAgent", "Momentum.AIAgent\Skribe.AIAgent.csproj", "{F988EE03-0E05-6084-457A-E1C9BDDDA2C8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIAgent", "AIAgent\AIAgent.csproj", "{02FB8035-E66F-4EEE-BB71-BD393791C53D}"
 EndProject

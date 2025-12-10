@@ -7,7 +7,7 @@ using Azure.Storage.Blobs;
 using System.Text.Json;
 using Microsoft.Extensions.Configuration;
 
-namespace Momentum.Shared.Data;
+namespace Skribe.Shared.Data;
 
 public class BlobStorageService
 {

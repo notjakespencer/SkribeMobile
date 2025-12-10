@@ -1,9 +1,9 @@
 ﻿using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Controls;
-using Momentum.Shared.Models;
+using Skribe.Shared.Models;
 using System;
 
-namespace Momentum.Shared.Services
+namespace Skribe.Shared.Services
 {
     public class UserStateService
     {

@@ -1,10 +1,7 @@
 ﻿using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.PlatformConfiguration;
 using Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;
-using MomentumMaui.Services;
 using MomentumMaui.Controls;
-using Momentum.Shared.Services;
-using Momentum.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,6 +12,8 @@ using Microsoft.Maui.ApplicationModel;
 using MauiNavigation = Microsoft.Maui.Controls.NavigationPage;
 // Alias to disambiguate the MAUI Application type from the platform-specific one
 using MauiApplication = Microsoft.Maui.Controls.Application;
+using Skribe.Shared.Services;
+using Skribe.Shared.Models;
 
 namespace MomentumMaui
 {

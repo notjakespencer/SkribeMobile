@@ -1,10 +1,5 @@
 ﻿using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Controls;
-using MomentumMaui.Controls;
-using Momentum.Shared.Data;
-using Momentum.Shared.Services;
-using MomentumMaui.Services;
-using Momentum.Shared.Models;
 using Momentum.AIAgent.Services;
 using System;
 using System.Threading;
@@ -13,6 +8,10 @@ using System.IO;
 using System.Text.Json;
 using Microsoft.Maui.Storage;
 using Microsoft.Maui.Graphics;
+using Skribe.Shared.Services;
+using Skribe.Shared.Models;
+using Skribe.Shared.Data;
+using SKRIBE.Controls;
 
 namespace MomentumMaui
 {

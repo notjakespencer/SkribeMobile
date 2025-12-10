@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Momentum.Shared.Data;
-using Momentum.Shared.Models;
+using Skribe.Shared.Data;
+using Skribe.Shared.Models;
 
-namespace Momentum.Shared.Services
+namespace Skribe.Shared.Services
 {
     internal class PerUserPromptService
     {

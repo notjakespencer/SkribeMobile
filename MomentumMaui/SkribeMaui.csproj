@@ -93,8 +93,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Momentum.AIAgent\Momentum.AIAgent.csproj" />
-		<ProjectReference Include="..\Momentum.Shared\Momentum.Shared.csproj" />
+		<ProjectReference Include="..\Momentum.AIAgent\Skribe.AIAgent.csproj" />
+		<ProjectReference Include="..\Momentum.Shared\Skribe.Shared.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

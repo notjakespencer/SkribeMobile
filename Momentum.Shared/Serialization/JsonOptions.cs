@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace Momentum.Shared.Serialization
+namespace Skribe.Shared.Serialization
 {
     public static class JsonOptions
     {

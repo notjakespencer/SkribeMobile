@@ -1,9 +1,9 @@
-﻿using Momentum.Shared.Models;
+﻿using Skribe.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Momentum.Shared.Data
+namespace Skribe.Shared.Data
 {
     public static class PromptRepository
     {

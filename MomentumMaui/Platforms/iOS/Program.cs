@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace MomentumMaui
+namespace SKRIBE.Platforms.iOS
 {
     public class Program
     {

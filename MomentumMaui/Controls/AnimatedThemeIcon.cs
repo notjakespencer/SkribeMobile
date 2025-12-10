@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Maui.Controls;
 using static Microsoft.Maui.Easing;
 
-namespace MomentumMaui.Controls
+namespace SKRIBE.Controls
 {
     /// <summary>
     /// A small reusable ContentView that swaps an icon when the ThemeKey changes

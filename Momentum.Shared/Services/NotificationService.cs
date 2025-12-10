@@ -1,4 +1,4 @@
-﻿namespace MomentumMaui.Services
+﻿namespace Skribe.Shared.Services
 {
     public static class NotificationService
     {

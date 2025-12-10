@@ -11,7 +11,7 @@ using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Momentum.AIAgent.Services
+namespace Skribe.AIAgent.Services
 {
     public class PromptGeneratorService
     {

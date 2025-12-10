@@ -1,8 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
+using MomentumMaui;
 
-namespace MomentumMaui
+namespace SKRIBE
 {
     public static class MauiProgram
     {

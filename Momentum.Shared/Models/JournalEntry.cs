@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Momentum.Shared.Models
+namespace Skribe.Shared.Models
 {
     public class JournalEntry
     {

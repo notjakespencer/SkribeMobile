@@ -1,7 +1,8 @@
 ﻿using Android.App;
 using Android.Runtime;
+using SKRIBE;
 
-namespace MomentumMaui
+namespace SKRIBE.Platforms.Android
 {
     [Application]
     public class MainApplication : MauiApplication
