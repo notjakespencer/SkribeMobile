@@ -4,9 +4,7 @@
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "AZURE_OPENAI_ENDPOINT": "https://momentummaui-resource.openai.azure.com/",
-        "AZURE_OPENAI_DEPLOYMENT_NAME": "MomentumMaui"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "https://localhost:54626;http://localhost:54627"
     }

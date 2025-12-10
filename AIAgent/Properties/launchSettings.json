@@ -1,11 +1,7 @@
 {
   "profiles": {
     "AIAgent": {
-      "commandName": "Project",
-      "environmentVariables": {
-        "AZURE_OPENAI_ENDPOINT": "https://momentummaui-resource.openai.azure.com/",
-        "AZURE_OPENAI_DEPLOYMENT_NAME": "MomentumMaui"
-      }
+      "commandName": "Project"
     }
   }
 }
