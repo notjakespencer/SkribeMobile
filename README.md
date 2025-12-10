@@ -4,17 +4,11 @@ A .NET MAUI mobile application for daily journaling with AI-powered prompts, moo
 
 <!-- Screenshot placeholders: replace with real images in Resources/Docs/images/ -->
 
-![Splash Page](Resources/Docs/images/splash.png)
+![Splash Page](MomentumMaui/Resources/Docs/images/splash.png) ![Main Page](MomentumMaui/Resources/Docs/images/main_page.png) ![Mood Selection](MomentumMaui/Resources/Docs/images/mood_page.png)
 
-![Main Page](Resources/Docs/images/main_page.png)
+ ![Sucess Page](MomentumMaui/Resources/Docs/images/success_page.png)![History / Calendar Page](MomentumMaui/Resources/Docs/images/calendar_page.png) ![Entry Modal](MomentumMaui/Resources/Docs/images/entry_modal.png)
 
-![Mood Selection](Resources/Docs/images/mood_page.png)
 
-![Sucess Page](Resources/Docs/images/success_page.png)
-
-![History / Calendar Page](Resources/Docs/images/calendar_page.png)
-
-![Entry Modal](Resources/Docs/images/entry_modal.png)
 
 Summary
 
