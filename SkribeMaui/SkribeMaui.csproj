@@ -50,15 +50,13 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-android|AnyCPU'">
-	  <AndroidPackageFormat>apk</AndroidPackageFormat>
+	  <AndroidPackageFormat>aab</AndroidPackageFormat>
+	  <AndroidUseAapt2>True</AndroidUseAapt2>
+	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<!-- Produce an APK for sideloading -->
-		<AndroidPackageFormat>apk</AndroidPackageFormat>
-		<!-- Create single APKs per ABI if desired -->
-		<AndroidCreatePackagePerAbi>true</AndroidCreatePackagePerAbi>
-		<!-- Enable keystore signing -->
+		<!-- Keep signing here but do not override Android packaging -->
 		<AndroidKeyStore>True</AndroidKeyStore>
 		<AndroidSigningKeyStore>$(MSBuildThisFileDirectory)signing\my-release-key.keystore</AndroidSigningKeyStore>
 		<AndroidSigningKeyAlias>skribe</AndroidSigningKeyAlias>
