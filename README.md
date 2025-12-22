@@ -2,7 +2,7 @@
 
 A .NET MAUI mobile application for daily journaling with AI-powered prompts, mood tracking, and progress visualization.
 
-<!-- Screenshot placeholders: replace with real images in Resources/Docs/images/ -->
+## 👉 [Installation & Testing Guide](INSTALL.md)
 
 ![Splash Page](SkribeMaui/Resources/Docs/images/splash.png) ![Main Page](SkribeMaui/Resources/Docs/images/main_page.png) ![Mood Selection](SkribeMaui/Resources/Docs/images/mood_page.png)
 
@@ -60,23 +60,10 @@ Future Features
 - Cloud sync & backups: sync entries and user stats via Azure Storage or another cloud backend for multi-device continuity.
 - Calendar export and analytics: export mood history and XP progress; visual analytics for streaks and writing habits.
 Build & run (local)
+- Push notifications to notify users to complete their entry daily.
 
 1. Open `SkribeMaui.sln` in Visual Studio (2022/2023) or use the CLI.
 2. Select target device/emulator and Run (F5) from Visual Studio.
-
-CLI examples
-
-- Android debug build:
-
-```bash
-dotnet build -f net10.0-android -c Debug
-```
-
-- Android publish (AAB) for release:
-
-```bash
-dotnet publish -f net10.0-android -c Release -o ./publish /p:AndroidPackageFormat=aab
-```
 
 Contributing
 
@@ -86,5 +73,4 @@ Contributing
 
 Notes
 
-- Targets .NET 10 and uses MAUI APIs. Replace placeholder screenshots in `Resources/Docs/images/` and commit them so the README displays real images on GitHub.
 - Entries are currently stored locally; cloud sync / backup via Azure Storage is planned as part of backend integration.
