@@ -279,7 +279,7 @@
             Aspect="AspectFit"
             Margin="0, 0, 75, 0"
             AutomationProperties.IsInAccessibleTree="True"
-            AutomationProperties.Name="Journal" />
+            SemanticProperties.Description="Journal" />
 
         <ImageButton
             x:Name="HistoryImageButton"
@@ -290,7 +290,7 @@
             Aspect="AspectFit"
             Margin="75, 0, 0, 0"
             AutomationProperties.IsInAccessibleTree="True"
-            AutomationProperties.Name="Journal" />
+            SemanticProperties.Description="Journal" />
       </HorizontalStackLayout>
     </Border>
   </Grid>

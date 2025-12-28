@@ -22,7 +22,7 @@
               HorizontalOptions="Center"
               WidthRequest="360"
               AutomationProperties.IsInAccessibleTree="True"
-              AutomationProperties.Name="Entry details card">
+              SemanticProperties.Description="Entry details card">
         <Border.StrokeShape>
           <RoundRectangle CornerRadius="20" />
         </Border.StrokeShape>

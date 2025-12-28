@@ -134,7 +134,7 @@
                                Aspect="AspectFit"
                                VerticalOptions="Center"
                                AutomationProperties.IsInAccessibleTree="True"
-                               AutomationProperties.Name="Clock icon" />
+                               SemanticProperties.Description="Clock icon" />
                         <Label x:Name="TimerHintLabel"
                                Text="Start typing to begin"
                                HorizontalTextAlignment="Center"
@@ -216,7 +216,7 @@
               VerticalOptions="Fill"
               Background="{DynamicResource BackgroundBrush}"
               AutomationProperties.IsInAccessibleTree="True"
-              AutomationProperties.Name="Success overlay">
+              SemanticProperties.Description="Success overlay">
           <!-- center the success card -->
           <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -233,7 +233,7 @@
                   VerticalOptions="Center"
                   WidthRequest="360"
                   AutomationProperties.IsInAccessibleTree="True"
-                  AutomationProperties.Name="Success card">
+                  SemanticProperties.Description="Success card">
             <Border.StrokeShape>
               <RoundRectangle CornerRadius="20" />
             </Border.StrokeShape>
@@ -315,7 +315,7 @@
               VerticalOptions="Fill"
               Background="#80000000"
               AutomationProperties.IsInAccessibleTree="True"
-              AutomationProperties.Name="Mood selection overlay">
+              SemanticProperties.Description="Mood selection overlay">
           <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.05*" />
             <ColumnDefinition Width="0.90*" />
@@ -426,7 +426,7 @@
                     Aspect="AspectFit"
                     Margin="0, 0, 75, 0" 
                     AutomationProperties.IsInAccessibleTree="True"
-                    AutomationProperties.Name="Journal" />
+                    SemanticProperties.Description="Journal" />
 
                 <!-- RESET (TEST) button  REMOVE BEFORE DEPLOYMENT 
                 <Button x:Name="ResetProgressButton"
@@ -449,7 +449,7 @@
                     Aspect="AspectFit"
                     Margin="75, 0, 0, 0"
                     AutomationProperties.IsInAccessibleTree="True"
-                    AutomationProperties.Name="History" />
+                    SemanticProperties.Description="History" />
             </HorizontalStackLayout>
         </Border>
     </Grid>
