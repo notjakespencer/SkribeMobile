@@ -16,13 +16,21 @@ using MauiNavigation = Microsoft.Maui.Controls.NavigationPage;
 using MauiApplication = Microsoft.Maui.Controls.Application;
 using Skribe.Shared.Services;
 using Skribe.Shared.Models;
+using System.Threading.Tasks;
 
 namespace SkribeMaui
 {
     public partial class CalendarPage : ContentPage
     {
         private readonly UserStateService _userStats = new();
-        private bool _swipeGesturesAttached;
+        private DateTime _currentMonth = DateTime.Today;
+
+        // Swipe gesture state
+        private double _panX;
+        private bool _isAnimating;
+        private const double SwipeThreshold = 50;
+        private const double MaxDragDistance = 80;
+        private const uint AnimationDuration = 200;
 
         public CalendarPage()
         {
@@ -57,24 +65,22 @@ namespace SkribeMaui
             }
         }
 
+        private void RefreshCalendarForMonth(DateTime month)
+        {
+            _currentMonth = month;
+            MyCalendar.CurrentMonth = month;
+            LoadEntriesForMonth(MyCalendar, month);
+            RefreshStats();
+        }
+
         private void CalendarPage_Loaded(object? sender, EventArgs e)
         {
             Loaded -= CalendarPage_Loaded;
-            var myCalendar = FindByName("MyCalendar") as Controls.CalendarGrid;
-            if (myCalendar == null)
-            {
-                return;
-            }
 
-            myCalendar.CurrentMonth = DateTime.Now;
+            RefreshCalendarForMonth(DateTime.Now);
 
-            LoadEntriesForMonth(myCalendar, myCalendar.CurrentMonth);
-            UpdateMonthHeader(myCalendar.CurrentMonth);
-
-            myCalendar.DateSelected -= OnCalendarDateSelected;
-            myCalendar.DateSelected += OnCalendarDateSelected;
-
-            RefreshStats();
+            MyCalendar.DateSelected -= OnCalendarDateSelected;
+            MyCalendar.DateSelected += OnCalendarDateSelected;
         }
 
         protected override void OnAppearing()
@@ -110,12 +116,7 @@ namespace SkribeMaui
             {
                 try
                 {
-                    var myCalendar = FindByName("MyCalendar") as Controls.CalendarGrid;
-                    if (myCalendar != null)
-                    {
-                        LoadEntriesForMonth(myCalendar, myCalendar.CurrentMonth);
-                        UpdateMonthHeader(myCalendar.CurrentMonth);
-                    }
+                    LoadEntriesForMonth(MyCalendar, MyCalendar.CurrentMonth);
                 }
                 catch
                 {
@@ -145,40 +146,15 @@ namespace SkribeMaui
                     totalEntries = 0;
                 }
 
-                var totalLabel = FindByName("TotalEntriesLabel") as Label;
-                var currentStreakLabel = FindByName("CurrentStreakLabel") as Label;
-                var longestStreakLabel = FindByName("LongestStreakLabel") as Label;
-                var levelLabel = FindByName("CurrentLevelLabel") as Label;
-
-                if (totalLabel != null)
-                {
-                    totalLabel.Text = totalEntries.ToString();
-                }
-
-                if (currentStreakLabel != null)
-                {
-                    currentStreakLabel.Text = _userStats.Streak.Current.ToString();
-                }
-
-                if (longestStreakLabel != null)
-                {
-                    longestStreakLabel.Text = _userStats.Streak.Longest.ToString();
-                }
-
-                if (levelLabel != null)
-                {
-                    levelLabel.Text = _userStats.Level.ToString();
-                }
+                TotalEntriesLabel.Text = totalEntries.ToString();
+                CurrentStreakLabel.Text = _userStats.Streak.Current.ToString();
+                LongestStreakLabel.Text = _userStats.Streak.Longest.ToString();
+                CurrentLevelLabel.Text = _userStats.Level.ToString();
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"RefreshStats error: {ex}");
             }
-        }
-
-        private async void OnOpenEntryClicked(object sender, EventArgs e)
-        {
-            await DisplayAlertAsync("History", "No date picker available. Select a date from the calendar to open an entry.", "OK");
         }
 
         // Navigate back to the Journal page when the journal image/button is tapped.
@@ -208,29 +184,6 @@ namespace SkribeMaui
 
             var newWindow = new Window(navPage);
             MauiApplication.Current?.OpenWindow(newWindow);
-        }
-
-        private void NavigateMonths(int monthOffset)
-        {
-            var calendar = FindByName("MyCalendar") as Controls.CalendarGrid;
-            if (calendar == null)
-            {
-                return;
-            }
-
-            var newMonth = calendar.CurrentMonth.AddMonths(monthOffset);
-            calendar.CurrentMonth = newMonth;
-
-            LoadEntriesForMonth(calendar, newMonth);
-            UpdateMonthHeader(newMonth);
-        }
-
-        private void UpdateMonthHeader(DateTime month)
-        {
-            if (FindByName("MonthLabel") is Label label)
-            {
-                label.Text = month.ToString("MMMM yyyy");
-            }
         }
 
         private void LoadEntriesForMonth(Controls.CalendarGrid calendar, DateTime month)
@@ -308,14 +261,101 @@ namespace SkribeMaui
             await DisplayAlertAsync("Entry Details", fallbackMsg, "OK");
         }
 
-        private void OnCalendarSwipedLeft(object? sender, SwipedEventArgs e)
+        #region Swipe Gesture Handling
+
+        // Event handler must be async void, not async Task
+        private async void OnCalendarPanUpdated(object? sender, PanUpdatedEventArgs e)
         {
-            NavigateMonths(1);
+            if (_isAnimating)
+                return;
+
+            switch (e.StatusType)
+            {
+                case GestureStatus.Started:
+                    _panX = 0;
+                    break;
+
+                case GestureStatus.Running:
+                    // Clamp the drag distance for a "rubber band" feel
+                    _panX = Math.Clamp(e.TotalX, -MaxDragDistance, MaxDragDistance);
+                    
+                    // Move calendar with finger (visual feedback)
+                    MyCalendar.TranslationX = _panX;
+                    
+                    // Fade slightly as it moves
+                    MyCalendar.Opacity = 1.0 - (Math.Abs(_panX) / MaxDragDistance * 0.3);
+                    break;
+
+                case GestureStatus.Completed:
+                case GestureStatus.Canceled:
+                    await HandleSwipeCompleted();
+                    break;
+            }
         }
 
-        private void OnCalendarSwipedRight(object? sender, SwipedEventArgs e)
+        private async Task HandleSwipeCompleted()
         {
-            NavigateMonths(-1);
+            _isAnimating = true;
+
+            try
+            {
+                if (_panX < -SwipeThreshold)
+                {
+                    // Swiped left -> next month
+                    await AnimateMonthTransition(isNext: true);
+                }
+                else if (_panX > SwipeThreshold)
+                {
+                    // Swiped right -> previous month
+                    await AnimateMonthTransition(isNext: false);
+                }
+                else
+                {
+                    // Didn't swipe far enough -> snap back
+                    await SnapBack();
+                }
+            }
+            finally
+            {
+                _panX = 0;
+                _isAnimating = false;
+            }
         }
+
+        private async Task AnimateMonthTransition(bool isNext)
+        {
+            var slideOutDistance = isNext ? -Width : Width;
+            var slideInDistance = isNext ? Width : -Width;
+
+            // Slide out current view
+            await Task.WhenAll(
+                MyCalendar.TranslateTo(slideOutDistance * 0.5, 0, AnimationDuration / 2, Easing.CubicIn),
+                MyCalendar.FadeTo(0, AnimationDuration / 2)
+            );
+
+            // Update to new month
+            var newMonth = _currentMonth.AddMonths(isNext ? 1 : -1);
+            RefreshCalendarForMonth(newMonth);
+
+            // Position off-screen on opposite side
+            MyCalendar.TranslationX = slideInDistance * 0.3;
+            MyCalendar.Opacity = 0;
+
+            // Slide in new view
+            await Task.WhenAll(
+                MyCalendar.TranslateTo(0, 0, AnimationDuration / 2, Easing.CubicOut),
+                MyCalendar.FadeTo(1, AnimationDuration / 2)
+            );
+        }
+
+        private async Task SnapBack()
+        {
+            await Task.WhenAll(
+                MyCalendar.TranslateTo(0, 0, AnimationDuration, Easing.CubicOut),
+                MyCalendar.FadeTo(1, AnimationDuration)
+            );
+        }
+
+        #endregion
     }
 }

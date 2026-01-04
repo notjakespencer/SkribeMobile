@@ -428,7 +428,7 @@
                     AutomationProperties.IsInAccessibleTree="True"
                     SemanticProperties.Description="Journal" />
 
-                <!-- RESET (TEST) button  REMOVE BEFORE DEPLOYMENT 
+                <!-- RESET (TEST) button  REMOVE BEFORE DEPLOYMENT -->
                 <Button x:Name="ResetProgressButton"
                         Text="Reset (Test)"
                         Clicked="OnResetProgressClicked"
@@ -436,7 +436,7 @@
                         VerticalOptions="Center"
                         WidthRequest="120"
                         IsVisible="True" />
-                -->
+                
 
                 <!-- History -->
                 <ImageButton

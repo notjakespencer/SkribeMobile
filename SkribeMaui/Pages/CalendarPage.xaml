@@ -6,23 +6,126 @@
              Shell.NavBarIsVisible="False"
              Title="">
 
-  <Grid RowDefinitions="*, Auto">
-    <!-- Content -->
-    <ScrollView Grid.Row="0" >
-      <VerticalStackLayout Padding="15, 0" Spacing="12" >
-        <Label Text="Your Journal History"
-               FontAttributes="Bold"
-               FontSize="22"
-               HorizontalOptions="Center" />
+  <Grid RowDefinitions="Auto, *, Auto, Auto">
+    
+    <!-- Title and Subtitle at top -->
+    <VerticalStackLayout Grid.Row="0" Padding="15,10,15,0" Spacing="4">
+      <Label Text="Your Journal History"
+             FontAttributes="Bold"
+             FontSize="22"
+             HorizontalOptions="Center" />
 
-        <Label Text="Reflect on your journey and track your moods over time"
-               FontAttributes="None"
-               FontSize="18"
-               TextColor="Gray"
-               HorizontalOptions="Center" />
+      <Label Text="Reflect on your journey and track your moods over time"
+             FontSize="16"
+             TextColor="Gray"
+             HorizontalOptions="Center" />
 
-        <!-- 2x2 summary grid inserted here (styled like MainPage cards) -->
-        <Grid Margin="0,8">
+      <!-- 2x2 summary grid -->
+      <Grid Margin="0,8">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Entries -->
+        <Border Grid.Row="0" Grid.Column="0"
+                Background="{DynamicResource CardBrush}"
+                Padding="10"
+                Margin="4"
+                VerticalOptions="Center">
+          <Border.StrokeShape>
+            <RoundRectangle CornerRadius="12" />
+          </Border.StrokeShape>
+          <VerticalStackLayout Spacing="2" VerticalOptions="Center">
+            <Label x:Name="TotalEntriesLabel" Text="0" FontAttributes="Bold" FontSize="16" />
+            <Label Text="Total Entries" FontSize="12" TextColor="{DynamicResource MutedForegroundBrush}" />
+          </VerticalStackLayout>
+        </Border>
+
+        <!-- Current Streak -->
+        <Border Grid.Row="0" Grid.Column="1"
+                Background="{DynamicResource CardBrush}"
+                Padding="10"
+                Margin="4"
+                VerticalOptions="Center">
+          <Border.StrokeShape>
+            <RoundRectangle CornerRadius="12" />
+          </Border.StrokeShape>
+          <VerticalStackLayout Spacing="2" VerticalOptions="Center">
+            <Label x:Name="CurrentStreakLabel" Text="0" FontAttributes="Bold" FontSize="16" />
+            <Label Text="Current Streak" FontSize="12" TextColor="{DynamicResource MutedForegroundBrush}" />
+          </VerticalStackLayout>
+        </Border>
+
+        <!-- Longest Streak -->
+        <Border Grid.Row="1" Grid.Column="0"
+                Background="{DynamicResource CardBrush}"
+                Padding="10"
+                Margin="4"
+                VerticalOptions="Center">
+          <Border.StrokeShape>
+            <RoundRectangle CornerRadius="12" />
+          </Border.StrokeShape>
+          <VerticalStackLayout Spacing="2" VerticalOptions="Center">
+            <Label x:Name="LongestStreakLabel" Text="0" FontAttributes="Bold" FontSize="16" />
+            <Label Text="Longest Streak" FontSize="12" TextColor="{DynamicResource MutedForegroundBrush}" />
+          </VerticalStackLayout>
+        </Border>
+
+        <!-- Current Level -->
+        <Border Grid.Row="1" Grid.Column="1"
+                Background="{DynamicResource CardBrush}"
+                Padding="10"
+                Margin="4"
+                VerticalOptions="Center">
+          <Border.StrokeShape>
+            <RoundRectangle CornerRadius="12" />
+          </Border.StrokeShape>
+          <VerticalStackLayout Spacing="2" VerticalOptions="Center">
+            <Label x:Name="CurrentLevelLabel" Text="1" FontAttributes="Bold" FontSize="16" />
+            <Label Text="Current Level" FontSize="12" TextColor="{DynamicResource MutedForegroundBrush}" />
+          </VerticalStackLayout>
+        </Border>
+      </Grid>
+    </VerticalStackLayout>
+
+    <!-- Calendar container with clipping -->
+    <Border x:Name="CalendarContainer"
+            Grid.Row="1"
+            Margin="15,8"
+            Background="{DynamicResource CardBrush}"
+            Padding="8">
+      <Border.StrokeShape>
+        <RoundRectangle CornerRadius="12" />
+      </Border.StrokeShape>
+      
+      <Border.GestureRecognizers>
+        <PanGestureRecognizer PanUpdated="OnCalendarPanUpdated" />
+      </Border.GestureRecognizers>
+
+      <controls:CalendarGrid x:Name="MyCalendar"
+                             BackgroundColor="Transparent"
+                             HorizontalOptions="Fill"
+                             VerticalOptions="Fill" />
+    </Border>
+
+    <!-- Full Mood legend card -->
+    <Border Grid.Row="2"
+            Margin="15,0,15,8"
+            Padding="12"
+            Background="{DynamicResource CardBrush}">
+      <Border.StrokeShape>
+        <RoundRectangle CornerRadius="12" />
+      </Border.StrokeShape>
+
+      <VerticalStackLayout Spacing="8">
+        <Label Text="Mood Legend" FontAttributes="Bold" FontSize="16" />
+
+        <Grid ColumnSpacing="12" RowSpacing="6">
           <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
@@ -30,250 +133,67 @@
           <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
           </Grid.RowDefinitions>
 
-          <!-- Entries (card style matching MainPage) -->
-          <Border Grid.Row="0" Grid.Column="0"
-                  Background="{DynamicResource CardBrush}"
-                  Padding="10"
-                  Margin="4"
-                  VerticalOptions="Center">
-            <Border.StrokeShape>
-              <RoundRectangle CornerRadius="12" />
-            </Border.StrokeShape>
+          <!-- Amazing -->
+          <HorizontalStackLayout Grid.Row="0" Grid.Column="0" Spacing="8" VerticalOptions="Center">
+            <Border WidthRequest="12" HeightRequest="12" Padding="0" Background="#10B981">
+              <Border.StrokeShape>
+                <RoundRectangle CornerRadius="6" />
+              </Border.StrokeShape>
+            </Border>
+            <Label Text="Amazing" VerticalTextAlignment="Center" />
+          </HorizontalStackLayout>
 
-            <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
-              <VerticalStackLayout Spacing="2" VerticalOptions="Center">
-                <Label x:Name="TotalEntriesLabel" Text="0" FontAttributes="Bold" FontSize="16" />
-                <Label Text="Total Entries" FontSize="12" TextColor="{DynamicResource MutedForegroundBrush}" />
-              </VerticalStackLayout>
-            </HorizontalStackLayout>
-          </Border>
+          <!-- Good -->
+          <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Spacing="8" VerticalOptions="Center">
+            <Border WidthRequest="12" HeightRequest="12" Padding="0" Background="#84CC16">
+              <Border.StrokeShape>
+                <RoundRectangle CornerRadius="6" />
+              </Border.StrokeShape>
+            </Border>
+            <Label Text="Good" VerticalTextAlignment="Center" />
+          </HorizontalStackLayout>
 
-          <!-- Current Streak -->
-          <Border Grid.Row="0" Grid.Column="1"
-                  Background="{DynamicResource CardBrush}"
-                  Padding="10"
-                  Margin="4"
-                  VerticalOptions="Center">
-            <Border.StrokeShape>
-              <RoundRectangle CornerRadius="12" />
-            </Border.StrokeShape>
+          <!-- Okay -->
+          <HorizontalStackLayout Grid.Row="1" Grid.Column="0" Spacing="8" VerticalOptions="Center">
+            <Border WidthRequest="12" HeightRequest="12" Padding="0" Background="#F59E0B">
+              <Border.StrokeShape>
+                <RoundRectangle CornerRadius="6" />
+              </Border.StrokeShape>
+            </Border>
+            <Label Text="Okay" VerticalTextAlignment="Center" />
+          </HorizontalStackLayout>
 
-            <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
-              <VerticalStackLayout Spacing="2" VerticalOptions="Center">
-                <Label x:Name="CurrentStreakLabel" Text="0" FontAttributes="Bold" FontSize="16" />
-                <Label Text="Current Streak" FontSize="12" TextColor="{DynamicResource MutedForegroundBrush}" />
-              </VerticalStackLayout>
-            </HorizontalStackLayout>
-          </Border>
+          <!-- Tough -->
+          <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Spacing="8" VerticalOptions="Center">
+            <Border WidthRequest="12" HeightRequest="12" Padding="0" Background="#F97316">
+              <Border.StrokeShape>
+                <RoundRectangle CornerRadius="6" />
+              </Border.StrokeShape>
+            </Border>
+            <Label Text="Tough" VerticalTextAlignment="Center" />
+          </HorizontalStackLayout>
 
-          <!-- Longest Streak -->
-          <Border Grid.Row="1" Grid.Column="0"
-                  Background="{DynamicResource CardBrush}"
-                  Padding="10"
-                  Margin="4"
-                  VerticalOptions="Center">
-            <Border.StrokeShape>
-              <RoundRectangle CornerRadius="12" />
-            </Border.StrokeShape>
-
-            <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
-              <VerticalStackLayout Spacing="2" VerticalOptions="Center">
-                <Label x:Name="LongestStreakLabel" Text="0" FontAttributes="Bold" FontSize="16" />
-                <Label Text="Longest Streak" FontSize="12" TextColor="{DynamicResource MutedForegroundBrush}" />
-              </VerticalStackLayout>
-            </HorizontalStackLayout>
-          </Border>
-
-          <!-- Current Level -->
-          <Border Grid.Row="1" Grid.Column="1"
-                  Background="{DynamicResource CardBrush}"
-                  Padding="10"
-                  Margin="4"
-                  VerticalOptions="Center">
-            <Border.StrokeShape>
-              <RoundRectangle CornerRadius="12" />
-            </Border.StrokeShape>
-
-            <HorizontalStackLayout Spacing="8" 
-                                   VerticalOptions="Center">
-                
-              <VerticalStackLayout Spacing="2" 
-                                   VerticalOptions="Center">
-                  
-                <Label x:Name="CurrentLevelLabel" 
-                       Text="1" 
-                       FontAttributes="Bold" 
-                       FontSize="16" />
-                  
-                <Label Text="Current Level" 
-                       FontSize="12" 
-                       TextColor="{DynamicResource MutedForegroundBrush}" />
-                  
-              </VerticalStackLayout>
-            </HorizontalStackLayout>
-          </Border>
+          <!-- Difficult -->
+          <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Spacing="8" VerticalOptions="Center">
+            <Border WidthRequest="12" HeightRequest="12" Padding="0" Background="#EF4444">
+              <Border.StrokeShape>
+                <RoundRectangle CornerRadius="6" />
+              </Border.StrokeShape>
+            </Border>
+            <Label Text="Difficult" VerticalTextAlignment="Center" />
+          </HorizontalStackLayout>
         </Grid>
-
-        <!-- Calendar control (replaces placeholder area) -->
-                <Border Margin="0, 8"
-                        Background="{DynamicResource CardBrush}"
-                        Padding="8" >
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="12" />
-                    </Border.StrokeShape>
-                    <Border.GestureRecognizers>
-                        <SwipeGestureRecognizer Direction="Left"
-                                                Swiped="OnCalendarSwipedLeft" />
-                        <SwipeGestureRecognizer Direction="Right"
-                                                Swiped="OnCalendarSwipedRight" />
-                    </Border.GestureRecognizers>
-
-                    <controls:CalendarGrid
-                        x:Name="MyCalendar"
-                        BackgroundColor="Transparent"
-                        HorizontalOptions="Fill"
-                        VerticalOptions="Fill" />
-                 </Border>
-
-
-        <!-- Mood legend card (compact grid layout) -->
-        <Border
-            Margin="0,8"
-            Padding="12"
-            Background="{DynamicResource CardBrush}">
-          <Border.StrokeShape>
-            <RoundRectangle CornerRadius="12" />
-          </Border.StrokeShape>
-
-          <VerticalStackLayout Spacing="8">
-            <Label Text="Mood Legend" FontAttributes="Bold" FontSize="16" />
-
-            <Grid ColumnSpacing="12" RowSpacing="6">
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-              </Grid.ColumnDefinitions>
-              <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-              </Grid.RowDefinitions>
-
-              <!-- Amazing -->
-              <HorizontalStackLayout Grid.Row="0"
-                                     Grid.Column="0"
-                                     Spacing="8" 
-                                     VerticalOptions="Center">
-                  
-                <Border WidthRequest="12" 
-                        HeightRequest="12" 
-                        Padding="0" 
-                        Background="#10B981">
-                    
-                  <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="6" />
-                  </Border.StrokeShape>
-                </Border>
-                  
-                <Label Text="Amazing" 
-                       VerticalTextAlignment="Center" />
-              </HorizontalStackLayout>
-
-              <!-- Good -->
-              <HorizontalStackLayout Grid.Row="0"
-                                     Grid.Column="1" 
-                                     Spacing="8" 
-                                     VerticalOptions="Center">
-                  
-                <Border WidthRequest="12" 
-                        HeightRequest="12" 
-                        Padding="0" 
-                        Background="#84CC16">
-                    
-                  <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="6" />
-                  </Border.StrokeShape>
-                </Border>
-                  
-                <Label Text="Good" 
-                       VerticalTextAlignment="Center" />
-              </HorizontalStackLayout>
-
-              <!-- Okay -->
-              <HorizontalStackLayout Grid.Row="1" 
-                                     Grid.Column="0" 
-                                     Spacing="8" 
-                                     VerticalOptions="Center">
-                  
-                <Border WidthRequest="12" 
-                        HeightRequest="12" 
-                        Padding="0" 
-                        Background="#F59E0B">
-                    
-                  <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="6" />
-                  </Border.StrokeShape>
-                </Border>
-                  
-                <Label Text="Okay" 
-                       VerticalTextAlignment="Center" />
-              </HorizontalStackLayout>
-
-              <!-- Tough -->
-              <HorizontalStackLayout Grid.Row="1" 
-                                     Grid.Column="1" 
-                                     Spacing="8" 
-                                     VerticalOptions="Center">
-                  
-                <Border WidthRequest="12" 
-                        HeightRequest="12" 
-                        Padding="0" 
-                        Background="#F97316">
-                    
-                  <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="6" />
-                  </Border.StrokeShape>                    
-                </Border>
-                  
-                <Label Text="Tough" 
-                       VerticalTextAlignment="Center" />
-              </HorizontalStackLayout>
-
-              <!-- Difficult (span two columns) -->
-              <HorizontalStackLayout Grid.Row="2" 
-                                     Grid.Column="0" 
-                                     Grid.ColumnSpan="2" 
-                                     Spacing="8" 
-                                     VerticalOptions="Center">
-                  
-                <Border WidthRequest="12" 
-                        HeightRequest="12" 
-                        Padding="0" 
-                        Background="#EF4444">
-                    
-                  <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="6" />
-                  </Border.StrokeShape>
-                </Border>
-                  
-                <Label Text="Difficult" 
-                       VerticalTextAlignment="Center" />
-                  
-              </HorizontalStackLayout>
-            </Grid>
-          </VerticalStackLayout>
-        </Border>
-
       </VerticalStackLayout>
-    </ScrollView>
+    </Border>
 
-    <!-- Bottom navigation (matches MainPage style) -->
-        <Border Grid.Row="1"
+    <!-- Bottom navigation -->
+    <Border Grid.Row="3"
             Padding="10"
-            Background="{AppThemeBinding Light={StaticResource LightCard}, Dark={StaticResource DarkBackground}}" >
-            <HorizontalStackLayout Spacing="12" HorizontalOptions="Center" VerticalOptions="Center">
+            Background="{AppThemeBinding Light={StaticResource LightCard}, Dark={StaticResource DarkBackground}}">
+      <HorizontalStackLayout Spacing="12" HorizontalOptions="Center" VerticalOptions="Center">
 
         <ImageButton
             x:Name="JournalImageButton"
@@ -296,7 +216,7 @@
             Aspect="AspectFit"
             Margin="75, 0, 0, 0"
             AutomationProperties.IsInAccessibleTree="True"
-            SemanticProperties.Description="Journal" />
+            SemanticProperties.Description="Calendar" />
       </HorizontalStackLayout>
     </Border>
   </Grid>

@@ -174,6 +174,9 @@ namespace SkribeMaui.Controls
         {
             System.Diagnostics.Debug.WriteLine("CalendarGrid: BuildCalendar start");
 
+            // Update month header
+            MonthLabel.Text = CurrentMonth.ToString("MMMM yyyy");
+
             // Do not clear Children here - preserve pooled buttons so they stay attached to the visual tree.
             // Clearing Children would detach pooled views and subsequent builds might not re-add them.
             // Only clear row definitions; pooled buttons are added when created below.
